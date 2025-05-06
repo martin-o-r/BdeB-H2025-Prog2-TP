@@ -1,3 +1,6 @@
+import eko.EKOConsole;
+import eko.EKOCouleur;
+
 public class Frog extends Enemy{
 
     //Attributs
@@ -21,6 +24,6 @@ public class Frog extends Enemy{
 
     @Override
     protected void dessiner() {
-
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(34, 139, 34));
     }
 }
