@@ -37,7 +37,6 @@ public abstract class GameProgressManager{
 
         switch(etiquette) {
             case AUTHOR :
-                InfoScreen.setTimesPressed();
                 updateScreen(new GameTitle());
                 break;
             case GAME_TITLE :

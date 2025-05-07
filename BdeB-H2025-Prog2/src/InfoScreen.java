@@ -1,10 +1,11 @@
 import eko.EKO;
 import eko.EKOTouche;
+import org.w3c.dom.ls.LSOutput;
 
 public abstract class InfoScreen extends ObjetJeu {
 
     private static boolean spaceIsPressed = false;
-    private static int timesPressed = 0;
+    private int timesPressed = 0;
 
     /**
      * Construteur d'objet de type InfoScreen
@@ -27,11 +28,16 @@ public abstract class InfoScreen extends ObjetJeu {
         chercher une methode avec un int, compteur qui determine combien de fois le SPACE a ete appuye
         pour continuer
          */
+
         if (EKOTouche.ESPACE.estEnfoncee()) {
-            timesPressed++;
-            if (timesPressed == 1) {
-                GameProgressManager.next(this.etiquette);
-            }
+            EKO.attendre(100);
+            timesPressed = 1;
+        } else {
+            timesPressed = 0;
+        }
+
+        if (timesPressed == 1) {
+            GameProgressManager.next(this.etiquette);
         }
 
 
@@ -55,9 +61,4 @@ public abstract class InfoScreen extends ObjetJeu {
      */
     @Override
     protected void dessiner() {}
-
-    public static void setTimesPressed() {
-        timesPressed = 0;
-    }
-
 }
