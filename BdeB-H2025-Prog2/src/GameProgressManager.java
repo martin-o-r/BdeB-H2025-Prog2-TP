@@ -35,6 +35,8 @@ public abstract class GameProgressManager{
      */
     public static void next(Etiquette etiquette) {
 
+        //a revoir pour lier avec intro screens
+
         switch(etiquette) {
             case AUTHOR :
                 updateScreen(new GameTitle());
