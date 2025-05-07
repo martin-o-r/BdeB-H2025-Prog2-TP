@@ -1,10 +1,17 @@
-import eko.EKO;
 import eko.EKOTouche;
-import org.w3c.dom.ls.LSOutput;
 
 public abstract class InfoScreen extends ObjetJeu {
 
-    private static boolean spaceIsPressed = false;
+
+    /*
+    Informations supplementaires sur KeyListener
+    https://stackoverflow.com/questions/10876491/how-to-use-keylistener
+        -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyee" et "est relachee"
+            -> enseignant recommande utiliser boolean pour faire le suivi
+     https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
+     */
+
+    private static boolean spaceWasPressed = false; //detection si ESPACE a ete appuye au "frame antecedent"
 
     /**
      * Construteur d'objet de type InfoScreen
@@ -18,27 +25,25 @@ public abstract class InfoScreen extends ObjetJeu {
     }
 
     /**
-     * Method a redefinir dans les sous-classe qui permet d'actualiser l'etat d'un objet
+     * Methode qui sert a faire defiler les ecrans d'affichage principaux
+     * -> glitch corrige : ESPACE.estEnfoncee() ne fait plus defiler tous les ecrans
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {
+        boolean spaceIsPressed = EKOTouche.ESPACE.estEnfoncee(); //detection si ESPACE a ete appuye au "frame actuel"
 
-        //a reessayer avec un boolean
-        //la touche doit etre detecte quand elle est relachee!!!!
-
-        //tenter de controler la barre espace avec un boolean
-        //boolean vraiment necessaire?
-        //methode avec un simple delai - mais le prof aime pas ca
-        if (EKOTouche.ESPACE.estEnfoncee()) {
-            if (!spaceIsPressed) {
-                spaceIsPressed = true;
-                GameProgressManager.next(this.etiquette);
-            } else {
-                spaceIsPressed = false; //reinitialise si la touche ESPACE est relachee
-            }
-            EKO.attendre(300);
+        /*
+        Logique :
+        Si la touche ESPACE a ete appuye au dernier frame (spaceWasPressed) et maintenant la touche n'est pas appuyee
+         (spaceIsPressed), alors cela implique que la touche ESPACE a ete appuye relachee. Donc, l'ensemble permet de
+          determiner que la touche ESPACE a ete appuye rien qu'une fois.
+         */
+        if (spaceWasPressed && !spaceIsPressed) {
+            GameProgressManager.next(this.etiquette);
         }
+
+        spaceWasPressed = spaceIsPressed; //reinitialise l'etat du frame avant a false
     }
 
     /**
