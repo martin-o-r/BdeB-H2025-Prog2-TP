@@ -4,7 +4,7 @@ import eko.EKOTouche;
 public abstract class InfoScreen extends ObjetJeu {
 
     private static boolean spaceIsPressed = false;
-    //private int timesPressed = 0;
+    private static int timesPressed = 0;
 
     /**
      * Construteur d'objet de type InfoScreen
@@ -27,18 +27,13 @@ public abstract class InfoScreen extends ObjetJeu {
         chercher une methode avec un int, compteur qui determine combien de fois le SPACE a ete appuye
         pour continuer
          */
-//        if (EKOTouche.ESPACE.estEnfoncee()) {
-//            timesPressed++;
-//        }
-//        if (timesPressed == 1) {
-//            GameProgressManager.next(this.etiquette);
-//            timesPressed = 0;
-//        }
-
-        //methode differente avec un delay
         if (EKOTouche.ESPACE.estEnfoncee()) {
-            GameProgressManager.next(this.etiquette);
+            timesPressed++;
+            if (timesPressed == 1) {
+                GameProgressManager.next(this.etiquette);
+            }
         }
+
 
 
         //tenter de controler la barre espace avec un boolean
@@ -60,5 +55,9 @@ public abstract class InfoScreen extends ObjetJeu {
      */
     @Override
     protected void dessiner() {}
+
+    public static void setTimesPressed() {
+        timesPressed = 0;
+    }
 
 }

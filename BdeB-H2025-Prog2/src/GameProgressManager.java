@@ -37,6 +37,7 @@ public abstract class GameProgressManager{
 
         switch(etiquette) {
             case AUTHOR :
+                InfoScreen.setTimesPressed();
                 updateScreen(new GameTitle());
                 break;
             case GAME_TITLE :
@@ -80,11 +81,12 @@ public abstract class GameProgressManager{
      * On efface l'efface l'ecran actuel puis on le reload
      */
     public static void restartLevel() {
-        currentScreen.detruire(); //on efface ce qui est affiche
+        currentScreen.detruire(); //on efface le niveau ce qui est affiche
 
-        ExitDoor.lockDoor();
+        ExitDoor.lockDoor(); //on s'assure que la porte de sortie soit verouillee au debut du niveau
 
-        if (currentScreen instanceof LevelFileReader) { //on teste si l'ecran actuel est un niveau
+        if (currentScreen instanceof LevelFileReader) { //on teste si l'ecran actuel est un niveau pour rappeler les
+            // memes parametres
             updateScreen(new LevelFileReader(((LevelFileReader) currentScreen).getLevelName(),
                     ((LevelFileReader) currentScreen).getLevelFilePath(),
                     ((LevelFileReader) currentScreen).getEtiquette(),
