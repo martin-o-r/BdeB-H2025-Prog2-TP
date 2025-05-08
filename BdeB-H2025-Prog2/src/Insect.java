@@ -26,6 +26,7 @@ public class Insect extends Enemy{
     private final String icon = "\uF188";
     private long waitBeforeMoving = 0;
     private InsectDirections direction = InsectDirections.RIGHT; //determine le sens de deplacement
+    private boolean lefthandRule = true; //determiner "quelle main utiliser"
 
     /**
      * Constructeur de l'objet de type Insect
@@ -69,28 +70,20 @@ public class Insect extends Enemy{
         //lorsque le prochain mouvement est une colision avec la porte de sortie, l'insecte devrait implementer la
         // regle de la main droite, pour faire demi-tour
         if (nextX == exitDoorX && nextY == exitDoorY) {
-            reverseDirection();
+            //implementer du code pour suivre right-hand rule
 
-            nextX = position.x;
-            nextY = position.y;
+        } else {
+            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+                position.x = nextX;
+                position.y = nextY;
 
-            switch (direction) {
-                case UP -> nextY++;
-                case DOWN -> nextY--;
-                case LEFT -> nextX++;
-                case RIGHT -> nextX--;
+                //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
+                testAndAdjustRoad();
+            } else {
+                changeDirection(); //s'il y aun mur a gauche et devant, alors on doit tourner a gauche
             }
         }
 
-        if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
-            position.x = nextX;
-            position.y = nextY;
-
-            //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
-            testAndAdjustRoad();
-        } else {
-            changeDirection(); //s'il y aun mur a gauche et devant, alors on doit tourner a gauche
-        }
     }
 
     /**
