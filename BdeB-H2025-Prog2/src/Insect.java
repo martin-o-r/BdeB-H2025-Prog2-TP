@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class Insect extends Enemy{
 
     /*
-    Tentative d'implementer l'algorithme 'left hand rule'
+    Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
     https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
     https://www.instructables.com/Robot-Maze-Solver/
         -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
@@ -15,13 +15,17 @@ public class Insect extends Enemy{
                 --> aller tout droit et tourner a gauche, alors faire demi-tour (pas besoin d'implementer cette partie)
     https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
     https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
+        -> Enum pour determiner un sens de deplacement e.g. RIGHT implique position.x++
     https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
     https://en.wikipedia.org/wiki/Maze-solving_algorithm
+    Enseignant :
+        -> commencer par la regle de la main gauche, se deplacer dans un sens e.g. RIGHT (sens de deplacement initial)
+        -> lorsque colision avec la porte, l'insecte devrait suivre la regle de main droite
      */
 
     private final String icon = "\uF188";
     private long waitBeforeMoving = 0;
-    private InsectDirections direction = InsectDirections.RIGHT;
+    private InsectDirections direction = InsectDirections.RIGHT; //determine le sens de deplacement
 
     /**
      * Constructeur de l'objet de type Insect
@@ -49,6 +53,8 @@ public class Insect extends Enemy{
         int nextX = position.x;
         int nextY = position.y;
 
+        //Insecte commence son deplacement en allant par la droite position.x++
+
         switch (direction) {
             case UP -> nextY--;
             case DOWN -> nextY++;
@@ -60,6 +66,8 @@ public class Insect extends Enemy{
         int exitDoorX = exitDoor.getX();
         int exitDoorY = exitDoor.getY();
 
+        //lorsque le prochain mouvement est une colision avec la porte de sortie, l'insecte devrait implementer la
+        // regle de la main droite, pour faire demi-tour
         if (nextX == exitDoorX && nextY == exitDoorY) {
             reverseDirection();
 
@@ -74,14 +82,14 @@ public class Insect extends Enemy{
             }
         }
 
-        if (isNextMoveValid(nextX, nextY)) {
+        if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
             position.x = nextX;
             position.y = nextY;
 
             //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
             testAndAdjustRoad();
         } else {
-            changeDirection();
+            changeDirection(); //s'il y aun mur a gauche et devant, alors on doit tourner a gauche
         }
     }
 
@@ -130,8 +138,8 @@ public class Insect extends Enemy{
     }
 
     /**
-     * Verifie s'il y un mur a gauche par rapport a la direction de l'insecte et ajuster la trajectoire pour longer le
-     * long d'un mur
+     * Methode qui Verifie s'il y un mur a gauche par rapport a la direction de l'insecte et ajustee la trajectoire
+     * pour continuer a longer le long du mur
      */
     private void testAndAdjustRoad() {
         InsectDirections leftDirection = getLeftDirection();
@@ -151,12 +159,12 @@ public class Insect extends Enemy{
             return;
         }
 
-        //si pas de mur a gauche, on tourne a gauche pour trouver un mur
+        //si pas de mur a gauche, on tourne a gauche pour continuer a longer un mur
         direction = leftDirection;
     }
 
     /**
-     * Method qui change la direction actuelle en cas de collision avec le insectTriger
+     * Method qui change de direction le deplacement de l'insecte s'il y a un mur a gauche et devant
      */
     private void changeDirection() {
         direction = getRightDirection();
