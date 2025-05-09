@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class Insect extends Enemy{
 
     /*
-    Tentative d'implementer l'algorithme 'left hand rule'
+    Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
     https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
     https://www.instructables.com/Robot-Maze-Solver/
         -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
@@ -15,13 +15,18 @@ public class Insect extends Enemy{
                 --> aller tout droit et tourner a gauche, alors faire demi-tour (pas besoin d'implementer cette partie)
     https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
     https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
+        -> Enum pour determiner un sens de deplacement e.g. RIGHT implique position.x++
     https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
     https://en.wikipedia.org/wiki/Maze-solving_algorithm
+    Enseignant :
+        -> commencer par la regle de la main gauche, se deplacer dans un sens e.g. RIGHT (sens de deplacement initial)
+        -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite
      */
 
     private final String icon = "\uF188";
     private long waitBeforeMoving = 0;
-    private InsectDirections direction = InsectDirections.RIGHT;
+    private InsectDirections direction = InsectDirections.RIGHT; //determine le sens de deplacement
+    private boolean lefthandRule = true; //determiner "quelle main utiliser"
 
     /**
      * Constructeur de l'objet de type Insect
@@ -49,6 +54,8 @@ public class Insect extends Enemy{
         int nextX = position.x;
         int nextY = position.y;
 
+        //Insecte commence son deplacement en allant par la droite position.x++
+
         switch (direction) {
             case UP -> nextY--;
             case DOWN -> nextY++;
@@ -56,44 +63,91 @@ public class Insect extends Enemy{
             case RIGHT -> nextX++;
         }
 
+        handDecisionMaker(nextX, nextY);
+
+        if (lefthandRule) {
+
+            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+                position.x = nextX;
+                position.y = nextY;
+
+                //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
+                goLeftHandRule();
+            } else {
+                changeDirectionLHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
+            }
+
+        } else {
+
+            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+                position.x = nextX;
+                position.y = nextY;
+
+                //verifier s'il y un mur a groite pour continuer a longer les mur - "left-hand rule"
+                goRightHandRule();
+            } else {
+                changeDirectionRHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
+            }
+        }
+
+    }
+
+    /**
+     * Methode qui permet de determiner quelle "main" suivre pour longer le mur
+     * @param x Position X de l'objet
+     * @param y Position Y de lobjet
+     */
+    private void handDecisionMaker(int x, int y) {
+        /*
+        Logique pour l'effet "toggle" avec un boolean
+        https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+            ->  un boolean va prendre la valeur inverse du lui-meme
+         */
+
+        if (didWeHitAroundExitDoor(x, y)) {
+            lefthandRule = !lefthandRule;
+            reverseDirection();
+        }
+    }
+
+    private void reverseDirection() { //tourner 180 degres
+        switch (direction) {
+            case UP -> direction = InsectDirections.DOWN;
+            case DOWN -> direction = InsectDirections.UP;
+            case RIGHT -> direction = InsectDirections.LEFT;
+            case LEFT -> direction = InsectDirections.RIGHT;
+        }
+    }
+
+    /**
+     * Methode qui permet de determiner si l'insecte collision avec la peripherie de la porte de sortie
+     * @param x Position X de l'insecte
+     * @param y Position Y de l'insecte
+     * @return boolean qui determine si l'insecte collision avec la periripherie de la porte de sortie
+     */
+    private boolean didWeHitAroundExitDoor(int x, int y) {
         ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
         int exitDoorX = exitDoor.getX();
         int exitDoorY = exitDoor.getY();
 
-        if (nextX == exitDoorX && nextY == exitDoorY) {
-            reverseDirection();
-
-            nextX = position.x;
-            nextY = position.y;
-
-            switch (direction) {
-                case UP -> nextY++;
-                case DOWN -> nextY--;
-                case LEFT -> nextX++;
-                case RIGHT -> nextX--;
-            }
+        //determine si on collision avec la "peripherie" de la porte
+        if ((x == exitDoorX && y == exitDoorY -1) || //on verifie le haut de la porte
+                (x == exitDoorX && y == exitDoorY + 1) || //on verifie le bas
+                (x == exitDoorX + 1 && y == exitDoorY) || //on verigie a droite
+                (x == exitDoorX -1 && y == exitDoorY)) { // on verifie a gauche
+            return true;
         }
-
-        if (isNextMoveValid(nextX, nextY)) {
-            position.x = nextX;
-            position.y = nextY;
-
-            //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
-            testAndAdjustRoad();
-        } else {
-            changeDirection();
-        }
+        return false;
     }
 
     /**
      * Method qui verifie si la prochaine position de deplacement est valide
      * versus un mur, la porte de sortie ou la porte d'entree
-     * @param x prochaine position x de l'insecte
-     * @param y prochaine position y de l'insecte
-     * @return boolean qui determine si l'insecte peut avancer ou non
+     * @param x Prochaine position x de l'insecte
+     * @param y Prochaine position y de l'insecte
+     * @return Boolean qui determine si l'insecte peut avancer ou non
      */
     private boolean isNextMoveValid(int x, int y) {
-
         if (HitAWall.didWeHitAWall(x, y)) {
             return false;
         }
@@ -118,22 +172,10 @@ public class Insect extends Enemy{
     }
 
     /**
-     * Method qui permet a l'insecte de rebrousser chemin lorsque le prochain deplacement est avec la porte de sortie
+     * Methode qui verifie s'il y un mur a gauche, par rapport a la direction de l'insecte et ajuste la trajectoire
+     * pour continuer a longer le mur
      */
-    private void reverseDirection() {
-        switch (direction) {
-            case UP -> direction = InsectDirections.DOWN;
-            case DOWN -> direction = InsectDirections.UP;
-            case RIGHT -> direction = InsectDirections.LEFT;
-            case LEFT -> direction = InsectDirections.RIGHT;
-        }
-    }
-
-    /**
-     * Verifie s'il y un mur a gauche par rapport a la direction de l'insecte et ajuster la trajectoire pour longer le
-     * long d'un mur
-     */
-    private void testAndAdjustRoad() {
+    private void goLeftHandRule() {
         InsectDirections leftDirection = getLeftDirection();
         int xLeft = position.x;
         int yLeft = position.y;
@@ -146,20 +188,53 @@ public class Insect extends Enemy{
             case RIGHT -> xLeft++;
         }
 
-        //si mur est a gauche, on continue a avancer
+        /*
+        Ici, on teste si le prochain deplacement a gauche est possible.
+        Si ce n'est pas possible (false), alors on "ne tourne pas" (true). On sort de la methode.
+        Si c'est possible (true), alors on tourne (false - permet de changer la valeur direction).
+         */
         if (!isNextMoveValid(xLeft, yLeft)) {
             return;
         }
 
-        //si pas de mur a gauche, on tourne a gauche pour trouver un mur
         direction = leftDirection;
     }
 
     /**
-     * Method qui change la direction actuelle en cas de collision avec le insectTriger
+     * Method qui change de direction le deplacement de l'insecte s'il y a un mur a droite et devant
      */
-    private void changeDirection() {
+    private void changeDirectionLHR() {
         direction = getRightDirection();
+    }
+
+    /**
+     * Methode qui verifie s'il y un mur a droite, par rapport a la direction de l'insecte et ajuste la trajectoire
+     * pour continuer a longer le mur
+     */
+    private void goRightHandRule() {
+        InsectDirections rightDirection = getRightDirection();
+        int xRight = position.x;
+        int yRight = position.y;
+
+        //caluler la position a droite de la direction actuelle
+        switch (rightDirection) {
+            case UP -> yRight--;
+            case DOWN -> yRight++;
+            case LEFT -> xRight--;
+            case RIGHT -> xRight++;
+        }
+
+        //si mur est a droite, on continue a avancer
+        if (!isNextMoveValid(xRight, yRight)) {
+            return;
+        }
+
+        //si pas de mur a droit, on tourne a droite pour continuer a longer un mur
+        direction = rightDirection;
+    }
+
+    private void changeDirectionRHR() {
+        direction = getLeftDirection();
     }
 
     /**
