@@ -83,7 +83,7 @@ public class Insect extends Enemy{
                 position.x = nextX;
                 position.y = nextY;
 
-                //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
+                //verifier s'il y un mur a groite pour continuer a longer les mur - "left-hand rule"
                 goRightHandRule();
             } else {
                 changeDirectionRHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
@@ -93,10 +93,14 @@ public class Insect extends Enemy{
     }
 
     private void handDecisionMaker(int x, int y) {
-        boolean hitExitDoor = didWeHitExitDoor(x, y);
+        /*
+        Logique pour l'effet "toggle" avec un boolean
+        https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+            ->  un boolean va prendre la valeur inverse du lui-meme
+         */
 
-        if (hitExitDoor && didWeHitExitDoor(x, y)) {
-            lefthandRule = false;
+        if (didWeHitAroundExitDoor(x, y)) {
+            lefthandRule = !lefthandRule;
             reverseDirection();
         }
     }
@@ -110,12 +114,19 @@ public class Insect extends Enemy{
         }
     }
 
-    private boolean didWeHitExitDoor(int x, int y) {
+    private boolean didWeHitAroundExitDoor(int x, int y) {
         ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
         int exitDoorX = exitDoor.getX();
         int exitDoorY = exitDoor.getY();
 
-        return x == exitDoorX && y == exitDoorY;
+        //determine si on collision avec la "peripherie" de la porte
+        if ((x == exitDoorX && y == exitDoorY -1) || //on verifie le haut de la porte
+                (x == exitDoorX && y == exitDoorY + 1) || //on verifie le bas
+                (x == exitDoorX + 1 && y == exitDoorY) || //on verigie a droite
+                (x == exitDoorX -1 && y == exitDoorY)) { // on verifie a gauche
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -131,13 +142,13 @@ public class Insect extends Enemy{
             return false;
         }
 
-//        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-//        int exitDoorX = exitDoor.getX();
-//        int exitDoorY = exitDoor.getY();
-//
-//        if (x == exitDoorX && y == exitDoorY) {
-//            return false;
-//        }
+        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+        int exitDoorX = exitDoor.getX();
+        int exitDoorY = exitDoor.getY();
+
+        if (x == exitDoorX && y == exitDoorY) {
+            return false;
+        }
 
         ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
         int entryDoorX = entryDoor.getX();
