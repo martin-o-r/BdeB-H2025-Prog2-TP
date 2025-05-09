@@ -20,7 +20,7 @@ public class Insect extends Enemy{
     https://en.wikipedia.org/wiki/Maze-solving_algorithm
     Enseignant :
         -> commencer par la regle de la main gauche, se deplacer dans un sens e.g. RIGHT (sens de deplacement initial)
-        -> lorsque colision avec la porte, l'insecte devrait suivre la regle de main droite
+        -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite
      */
 
     private final String icon = "\uF188";
@@ -63,27 +63,59 @@ public class Insect extends Enemy{
             case RIGHT -> nextX++;
         }
 
-        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-        int exitDoorX = exitDoor.getX();
-        int exitDoorY = exitDoor.getY();
+        handDecisionMaker(nextX, nextY);
 
-        //lorsque le prochain mouvement est une colision avec la porte de sortie, l'insecte devrait implementer la
-        // regle de la main droite, pour faire demi-tour
-        if (nextX == exitDoorX && nextY == exitDoorY) {
-            //implementer du code pour suivre right-hand rule
+        if (lefthandRule) {
 
-        } else {
             if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
                 position.x = nextX;
                 position.y = nextY;
 
                 //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
-                testAndAdjustRoad();
+                goLeftHandRule();
             } else {
-                changeDirection(); //s'il y aun mur a gauche et devant, alors on doit tourner a gauche
+                changeDirectionLHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
+            }
+
+        } else {
+
+            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+                position.x = nextX;
+                position.y = nextY;
+
+                //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
+                goRightHandRule();
+            } else {
+                changeDirectionRHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
             }
         }
 
+    }
+
+    private void handDecisionMaker(int x, int y) {
+        boolean hitExitDoor = didWeHitExitDoor(x, y);
+
+        if (hitExitDoor && didWeHitExitDoor(x, y)) {
+            lefthandRule = false;
+            reverseDirection();
+        }
+    }
+
+    private void reverseDirection() { //tourner 180 degres
+        switch (direction) {
+            case UP -> direction = InsectDirections.DOWN;
+            case DOWN -> direction = InsectDirections.UP;
+            case RIGHT -> direction = InsectDirections.LEFT;
+            case LEFT -> direction = InsectDirections.RIGHT;
+        }
+    }
+
+    private boolean didWeHitExitDoor(int x, int y) {
+        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+        int exitDoorX = exitDoor.getX();
+        int exitDoorY = exitDoor.getY();
+
+        return x == exitDoorX && y == exitDoorY;
     }
 
     /**
@@ -99,13 +131,13 @@ public class Insect extends Enemy{
             return false;
         }
 
-        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-        int exitDoorX = exitDoor.getX();
-        int exitDoorY = exitDoor.getY();
-
-        if (x == exitDoorX && y == exitDoorY) {
-            return false;
-        }
+//        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+//        int exitDoorX = exitDoor.getX();
+//        int exitDoorY = exitDoor.getY();
+//
+//        if (x == exitDoorX && y == exitDoorY) {
+//            return false;
+//        }
 
         ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
         int entryDoorX = entryDoor.getX();
@@ -119,22 +151,10 @@ public class Insect extends Enemy{
     }
 
     /**
-     * Method qui permet a l'insecte de rebrousser chemin lorsque le prochain deplacement est avec la porte de sortie
-     */
-    private void reverseDirection() {
-        switch (direction) {
-            case UP -> direction = InsectDirections.DOWN;
-            case DOWN -> direction = InsectDirections.UP;
-            case RIGHT -> direction = InsectDirections.LEFT;
-            case LEFT -> direction = InsectDirections.RIGHT;
-        }
-    }
-
-    /**
      * Methode qui Verifie s'il y un mur a gauche par rapport a la direction de l'insecte et ajustee la trajectoire
      * pour continuer a longer le long du mur
      */
-    private void testAndAdjustRoad() {
+    private void goLeftHandRule() {
         InsectDirections leftDirection = getLeftDirection();
         int xLeft = position.x;
         int yLeft = position.y;
@@ -156,10 +176,36 @@ public class Insect extends Enemy{
         direction = leftDirection;
     }
 
+    private void goRightHandRule() {
+        InsectDirections rightDirection = getRightDirection();
+        int xRight = position.x;
+        int yRight = position.y;
+
+        //caluler la position a droite de la direction actuelle
+        switch (rightDirection) {
+            case UP -> yRight--;
+            case DOWN -> yRight++;
+            case LEFT -> xRight--;
+            case RIGHT -> xRight++;
+        }
+
+        //si mur est a gauche, on continue a avancer
+        if (!isNextMoveValid(xRight, yRight)) {
+            return;
+        }
+
+        //si pas de mur a droit, on tourne a droite pour continuer a longer un mur
+        direction = rightDirection;
+    }
+
+    private void changeDirectionRHR() {
+        direction = getLeftDirection();
+    }
+
     /**
-     * Method qui change de direction le deplacement de l'insecte s'il y a un mur a gauche et devant
+     * Method qui change de direction le deplacement de l'insecte s'il y a un mur a droite et devant
      */
-    private void changeDirection() {
+    private void changeDirectionLHR() {
         direction = getRightDirection();
     }
 
