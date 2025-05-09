@@ -111,6 +111,9 @@ public class LevelFileReader extends ObjetJeu{
                     case 'I' :
                         Insect insect = new Insect(i, y);
                         everyGameObjects.add(insect);
+                    case 'R' :
+                        Frog frog = new Frog(i, y);
+                        everyGameObjects.add(frog);
                     default :
                         break;
                 }
