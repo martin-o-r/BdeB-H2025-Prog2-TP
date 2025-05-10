@@ -15,6 +15,7 @@ public class YouWon extends InfoScreen{
      */
     @Override
     protected void dessiner() {
+        String instruction = "APPUYER ESPACE POUR SORTIR";
         StringBuilder win = new StringBuilder();
 
         //image generee par ChatGPT
@@ -23,6 +24,7 @@ public class YouWon extends InfoScreen{
         win.append("  / \\\n");
 
         EKOConsole.afficher((EKOConsole.largeur() - 29)/2, EKOConsole.hauteur()/2, win.toString(), EKOCouleur.ROUGE);
-        super.dessiner();
+        EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) / 2, EKOConsole.hauteur() - 1, instruction,
+                EKOCouleur.GRIS_FONCE);
     }
 }

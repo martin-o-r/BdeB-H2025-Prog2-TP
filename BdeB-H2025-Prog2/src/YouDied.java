@@ -15,6 +15,7 @@ public class YouDied extends InfoScreen{
      */
     @Override
     public void dessiner() {
+        String instruction = "APPUYER ESPACE POUR SORTIR";
         StringBuilder lose = new StringBuilder();
 
         lose.append("       _____\n");
@@ -26,6 +27,7 @@ public class YouDied extends InfoScreen{
         lose.append("D: VOUS ETES MORT! X.X"); //24 char
 
         EKOConsole.afficher((EKOConsole.largeur() -  24)/2, 6, lose.toString(), EKOCouleur.BLANC);
-        super.dessiner();
+        EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) / 2, EKOConsole.hauteur() - 1, instruction,
+                EKOCouleur.GRIS_FONCE);
     }
 }
