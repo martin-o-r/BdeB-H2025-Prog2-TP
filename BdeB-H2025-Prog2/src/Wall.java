@@ -27,7 +27,7 @@ public class Wall extends ObjetJeu{
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.GRIS_FONCE);
+        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.NOIR);
     }
 
 }

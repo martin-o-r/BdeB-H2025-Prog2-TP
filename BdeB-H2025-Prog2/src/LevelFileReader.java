@@ -33,6 +33,7 @@ public class LevelFileReader extends ObjetJeu{
         this.levelCounter = levelCounter;
         lines = createArrayList(levelFilePath);
         loadLevel();
+        EKOConsole.couleurFond(EKOCouleur.RVB(43, 45, 47));
     }
 
     /**
