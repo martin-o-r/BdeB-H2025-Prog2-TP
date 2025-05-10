@@ -39,7 +39,7 @@ public abstract class Ghost extends Enemy {
     protected void mettreAJour(long deltaTemps) {
         //Buffer qui permet de ralentir le mettreAJour
         waitBeforeMoving += deltaTemps;
-        if(waitBeforeMoving < 35) {
+        if(waitBeforeMoving < 50) {
             return;
         }
         waitBeforeMoving = 0;
