@@ -15,7 +15,7 @@ public class Author extends InfoScreen {
      */
     @Override
     protected void dessiner() {
-        String auteur = "Martin Ore Rodriguez";
+        String auteur = "Martin Oré Rodriguez";
         String da = "1425594";
         int hauteurAffichage = EKOConsole.hauteur()/2;
 
