@@ -19,28 +19,28 @@ public class LifeIndicator extends ObjetJeu {
     }
 
     /**
-     * Method qui fait perdre 1 vie lorsque le Player entre en collision avec une ennemi
+     * Méthode qui fait perdre 1 vie lorsque le Player entre en collision avec un ennemi
      */
     public static void looseALife() {
         nbLifeLeft--;
     }
 
     /**
-     * Method qui faire remplir les toutes les vies perdues lorsque le joueur enttre en collision avec une potion
+     * Méthode qui faire remplir toutes les vies perdues lorsque le joueur entre en collision avec une potion
      */
     public static void refuelLife() {
         nbLifeLeft = 5;
     }
 
     /**
-     * Methode non implantee, car l'indicateur de vie ne se deplace pas
+     * Méthode non implantée, car l'indicateur de vie ne se deplace pas
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Methode qui permet l'affichage de l'indicateur de vie
+     * Méthode qui permet l'affichage de l'indicateur de vie
      */
     @Override
     protected void dessiner() {
@@ -49,6 +49,6 @@ public class LifeIndicator extends ObjetJeu {
         EKOConsole.afficher(position.x, position.y, life, EKOCouleur.ROSE);
     }
 
-    //accesseur
+    //Accesseur
     public static int getNbLifeLeft() { return nbLifeLeft; }
 }

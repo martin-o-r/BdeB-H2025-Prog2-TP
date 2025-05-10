@@ -141,7 +141,7 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Méthode qui est redéfinie pour detruire tous les objets inclus dans un niveau ainsi
+     * Méthode qui est redéfinie pour détruire tous les objets inclus dans un niveau ainsi
      * que l'objet niveau lui-meme
      */
     @Override
@@ -161,7 +161,7 @@ public class LevelFileReader extends ObjetJeu{
                 EKOCouleur.CYAN);
     }
 
-    //accesseurs
+    //Accesseurs
     public String getLevelName() { return levelName; }
     public String getLevelFilePath() { return levelFilePath; }
     public Etiquette getEtiquette() { return etiquette; }
