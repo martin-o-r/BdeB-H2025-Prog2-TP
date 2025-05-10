@@ -6,7 +6,7 @@ import eko.EKOSon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frog extends Enemy {
+public abstract class Frog extends Enemy {
 
     /*
     Logique pour creer une animation en java
@@ -18,6 +18,8 @@ public class Frog extends Enemy {
         ->Timer est une classe en soi! Non non, pas aller la...
         -> principe d'un chronometre qui marque le debut d'une action puis un autre chronometre qui marque la fin
         -> durant ce lapse, on implemente ce qui est desire
+    https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
+        -> on peut definir un temps d'attente, durant lequel on peut effectuer du code
      */
 
     //Attributs
@@ -45,6 +47,10 @@ public class Frog extends Enemy {
         super("Frog", x, y, Etiquette.ENEMY);
     }
 
+    /**
+     * Methode qui permet de gerer la longueur de la langue de la grenouille
+     * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
+     */
     @Override
     protected void mettreAJour(long deltaTemps) {
         //Buffer qui permet de ralentir le mettreAJour
@@ -77,16 +83,32 @@ public class Frog extends Enemy {
             tongueTimer = 0;
         }
 
+        /*
+        On doit effacer les donnees de la liste, sinon le joueur va entrer en collision avec une case vide
+         */
         tonguePositions.clear();
+
+        /*
+        On detecte que la langue est deployee, puis on va chercher la position de chacune des parties de la langue
+         */
         if (extendedTongue) {
             for (int i = 1; i <= tongueLength; i++) {
                 tonguePositions.add(new Position(position.x + i, position.y, 0));
             }
         }
 
+        /*
+        J'ai du implementer une nouvelle methode qui detecte la collision, car Collisionable ne detecte qu'avec
+        l'objet principal, dans ce cas la grenouille
+         */
         checkTongueCollision();
     }
 
+    protected abstract boolean facingLeft();
+
+    /**
+     * Methode qui permet de determiner une collision entre une partie de la langue de la grenouille et le joueur
+     */
     private void checkTongueCollision() {
         ObjetJeu player = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Player");
         int playerX = player.getX();
@@ -101,6 +123,9 @@ public class Frog extends Enemy {
         }
     }
 
+    /**
+     * Methode qui permet l'affichage de la grenouille et de sa langue
+     */
     @Override
     protected void dessiner() {
         EKOCouleur color = EKOCouleur.RVB(34, 139, 34);
