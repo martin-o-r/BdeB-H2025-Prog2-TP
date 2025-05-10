@@ -1,12 +1,12 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-public class GameWon extends InfoScreen{
+public class YouWon extends InfoScreen{
 
     /**
      * Constructeur pour l'ecran lorsque le jouer gagne le jeu
      */
-    public GameWon() {
+    public YouWon() {
         super("Win", 0,0, Etiquette.GAME_WON);
     }
 

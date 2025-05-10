@@ -11,6 +11,13 @@ public abstract class InfoScreen extends ObjetJeu {
      https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
      */
 
+    /*
+    Utilisation de System.exit(0) pour fermer la fenetre de la console une fois le jeu termine
+    https://stackoverflow.com/questions/30898773/how-do-i-use-system-exit-in-java
+    https://stackoverflow.com/questions/12117160/terminate-a-console-application-in-java
+    https://stackoverflow.com/questions/2434592/difference-in-system-exit0-system-exit-1-system-exit1-in-java
+     */
+
     private static boolean spaceWasPressed = false; //detection si ESPACE a ete appuye au "frame antecedent"
 
     /**
@@ -41,6 +48,13 @@ public abstract class InfoScreen extends ObjetJeu {
          */
         if (spaceWasPressed && !spaceIsPressed) {
             GameProgressManager.next(this.etiquette);
+
+            if (GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_WON ||
+                GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_OVER) {
+                System.exit(0);
+            }
+
+
         }
 
         spaceWasPressed = spaceIsPressed; //reinitialise l'etat du frame avant a false

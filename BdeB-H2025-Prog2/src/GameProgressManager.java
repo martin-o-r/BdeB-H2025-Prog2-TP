@@ -57,7 +57,7 @@ public abstract class GameProgressManager{
                 updateScreen(new LevelFileReader("Level4", "levels/level_04", Etiquette.LEVEL4, 4));
                 break;
             case LEVEL4 :
-                updateScreen(new GameWon());
+                updateScreen(new YouWon());
                 break;
             case GAME_OVER :
                 updateScreen(new YouDied());
