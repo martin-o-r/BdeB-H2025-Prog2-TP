@@ -59,11 +59,13 @@ public abstract class GameProgressManager{
                 updateScreen(new LevelFileReader("Level4", "levels/level_04", Etiquette.LEVEL4, 4));
                 break;
             case LEVEL4 :
+                EKOConsole.couleurFond(EKOCouleur.NOIR);
                 EKOAudio.arreter(BACKGROUND_MUSIC);
                 updateScreen(new YouWon());
                 EKOAudio.jouer(GAME_WON);
                 break;
             case GAME_OVER :
+                EKOConsole.couleurFond(EKOCouleur.NOIR);
                 EKOAudio.arreter(BACKGROUND_MUSIC);
                 updateScreen(new YouDied());
                 EKOAudio.jouer(GAME_LOST);
