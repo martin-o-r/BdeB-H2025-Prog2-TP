@@ -11,7 +11,7 @@ public class YouWon extends InfoScreen{
     }
 
     /**
-     * Redefinition de la methode dessiner pour afficher le message de victoire
+     * Redéfinition de la méthode dessiner pour afficher le message de victoire
      */
     @Override
     protected void dessiner() {
