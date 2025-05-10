@@ -39,8 +39,25 @@ public class Player extends ObjetJeu implements Collisionnable{
             nextMoveY++;
         }
 
-        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
-            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
+        boolean hitSomething = false;
+
+        ObjetJeu entryDoorTemp = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
+        int entryDoorX = entryDoorTemp.getX();
+        int entryDoorY = entryDoorTemp.getY();
+
+        ObjetJeu exitDoorTemp = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+        int exitDoorX = exitDoorTemp.getX();
+        int exitDoorY = exitDoorTemp.getY();
+
+        hitSomething = HitSomething.didWeHitAWall(nextMoveX, nextMoveY);
+
+        if ((entryDoorX == nextMoveX && entryDoorY == nextMoveY) || //joueur ne peut pas traverser la porte d'entree
+                (ExitDoor.isDoorLocked() && (exitDoorX == nextMoveX && exitDoorY == nextMoveY))) {
+            //joueur ne pas traverser la porte de sortie si elle n'est pas deverouillee
+            hitSomething = true;
+        }
+
+        if (!hitSomething) {
             position.x = nextMoveX;
             position.y = nextMoveY;
 
@@ -55,7 +72,6 @@ public class Player extends ObjetJeu implements Collisionnable{
     @Override
     protected void dessiner() {
         EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(255,158,158));
-        //couleur mocassin : FFE485 ou (255,228,133)
     }
 
     /**
