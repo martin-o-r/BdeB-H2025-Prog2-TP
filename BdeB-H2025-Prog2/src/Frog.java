@@ -86,22 +86,9 @@ public abstract class Frog extends Enemy {
          */
         tonguePositions.clear();
 
-        if (facingRight()) {
-            /*
-        On detecte que la langue est deployee, puis on va chercher la position de chacune des parties de la langue
-         */
-            if (extendedTongue) {
-                for (int i = 1; i <= tongueLength; i++) {
-                    tonguePositions.add(new Position(position.x + i, position.y, 0));
-                }
-            }
-        } else {
-            for (int i = 1; i <= tongueLength; i++) {
-                tonguePositions.add(new Position(position.x - i, position.y, 0));
-            }
+        for (int i = 1; i <= tongueLength; i++) {
+            tonguePositions.add(new Position(facingRight()? position.x + i : position.x - i, position.y, 0));
         }
-
-
 
         /*
         J'ai du implementer une nouvelle methode qui detecte la collision, car Collisionable ne detecte qu'avec
@@ -111,7 +98,7 @@ public abstract class Frog extends Enemy {
     }
 
     /**
-     *
+     * Methode qui permet de determiner l'orientation de la grenouille
      * @return Boolean qui determine quelle cote la grenouille regarde
      */
     protected abstract boolean facingRight();
