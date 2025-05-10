@@ -1,3 +1,4 @@
+import eko.EKO;
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
@@ -111,6 +112,15 @@ public class LevelFileReader extends ObjetJeu{
                     case 'I' :
                         Insect insect = new Insect(i, y);
                         everyGameObjects.add(insect);
+                        break;
+                    case 'C' :
+                        FrogLookingRight frogLookingRight = new FrogLookingRight(i, y);
+                        everyGameObjects.add(frogLookingRight);
+                        break;
+                    case 'V' :
+                        FrogLookingLeft frogLookingLeft = new FrogLookingLeft(i, y);
+                        everyGameObjects.add(frogLookingLeft);
+                        break;
                     default :
                         break;
                 }
@@ -119,7 +129,8 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Redefinition de la methode mettre a jour qui detecte si le joueur est mort durnat le jeu
+     * Redefinition de la methode mettre a jour qui permet de determiner si le jeu est fini quand le joueur a perdu
+     * toutes ses vies disponibles.
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -149,9 +160,6 @@ public class LevelFileReader extends ObjetJeu{
     protected void dessiner() {
         EKOConsole.afficher(EKOConsole.largeur() - 8, 0, "Salle " + String.format("%02d", levelCounter),
                 EKOCouleur.CYAN);
-
-        //utiliser enum pour acquererir le niveau
-        //moins de parametres c'est preferable - code d'ecriture
     }
 
     //accesseurs

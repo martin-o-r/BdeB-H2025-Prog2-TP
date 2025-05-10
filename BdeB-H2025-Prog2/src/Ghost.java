@@ -27,7 +27,7 @@ public abstract class Ghost extends Enemy {
     }
 
     /*
-    Ca m'a permis de developper la logique pour le deplacement sur l'axe X et Y, defini par chaque sous-class de Ghost
+    Aide pour developper la logique pour le deplacement sur l'axe X et Y, defini par chaque sous-class de Ghost
     https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
      */
 
