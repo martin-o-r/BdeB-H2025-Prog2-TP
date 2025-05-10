@@ -6,6 +6,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     private static final EKOSon KEY_CAPTURED = EKOAudio.charger("audio/404359__kagateni__success2_cut.wav");
     private static final EKOSon ENEMY_TOUCHED = EKOAudio.charger("audio/651625__martcraft__fail_cut.wav");
     private static final EKOSon POTION_DRINKED = EKOAudio.charger("audio/41529__jamius__potiondrinklong.wav");
+    private static final EKOSon EXIT_DOOR = EKOAudio.charger("audio/404358__kagateni__success_cut.wav");
 
     //Attributs propre a l'objet
     private static final String ICON = "\uEF0C";
@@ -96,6 +97,7 @@ public class Player extends ObjetJeu implements Collisionnable{
                 LifeIndicator.refuelLife();
                 break;
             case Etiquette.EXIT_DOOR :
+                EKOAudio.jouer(EXIT_DOOR);
                 GameProgressManager.next(GameProgressManager.getCurrentScreen().etiquette);
                 break;
             default :
