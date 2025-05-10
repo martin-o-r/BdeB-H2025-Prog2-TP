@@ -20,7 +20,7 @@ public class YouWon extends InfoScreen{
 
         //image generee par ChatGPT
         win.append("   (•_•) <3\n");
-        win.append("  <) )╯   Bravo! Tu as gagne!\n"); //29 caracteres
+        win.append("  <) )╯   Bravo! Vous avez gagné!\n"); //29 caracteres
         win.append("  / \\\n");
 
         EKOConsole.afficher((EKOConsole.largeur() - 29)/2, EKOConsole.hauteur()/2, win.toString(), EKOCouleur.ROUGE);
