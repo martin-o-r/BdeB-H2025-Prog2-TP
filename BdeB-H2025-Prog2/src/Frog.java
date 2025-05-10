@@ -46,7 +46,7 @@ public abstract class Frog extends Enemy {
     }
 
     /**
-     * Methode qui permet de gerer la longueur de la langue de la grenouille
+     * Méthode qui permet de gérer l'animation de la langue de la grenouille
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -82,33 +82,33 @@ public abstract class Frog extends Enemy {
         }
 
         /*
-        On doit effacer les donnees de la liste, sinon le joueur va entrer en collision avec une case vide
+        On doit effacer les données de la liste, sinon le joueur va entrer en collision avec une case vide
          */
         tonguePositions.clear();
 
         /*
-        Selon la l'orientation de la grenouille, les positions de la langue vont etre soit a droite de la grenouille
-        ou a gauche
+        Selon la l'orientation de la grenouille, les positions de la langue vont etre soit à droite de la grenouille
+        ou à gauche
          */
         for (int i = 1; i <= tongueLength; i++) {
             tonguePositions.add(new Position(facingRight()? position.x + i : position.x - i, position.y, 0));
         }
 
         /*
-        J'ai du implementer une nouvelle methode qui detecte la collision, car Collisionable ne detecte qu'avec
+        J'ai du implementer une nouvelle methode qui détecte la collision, car Collisionable ne detecte qu'avec
         l'objet principal, dans ce cas la grenouille
          */
         checkTongueCollision();
     }
 
     /**
-     * Methode qui permet de determiner l'orientation de la grenouille
-     * @return Boolean qui determine quelle cote la grenouille regarde
+     * Méthode qui permet de déterminer l'orientation de la grenouille
+     * @return Boolean qui détermine quelle côté la grenouille regarde
      */
     protected abstract boolean facingRight();
 
     /**
-     * Methode qui permet de determiner une collision entre une partie de la langue de la grenouille et le joueur
+     * Méthode qui permet de déterminer une collision entre une partie de la langue de la grenouille et le joueur
      */
     private void checkTongueCollision() {
         ObjetJeu player = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Player");
@@ -125,7 +125,7 @@ public abstract class Frog extends Enemy {
     }
 
     /**
-     * Methode qui permet l'affichage de la grenouille et de sa langue
+     * Méthode qui permet l'affichage de la grenouille et de sa langue
      */
     @Override
     protected void dessiner() {
