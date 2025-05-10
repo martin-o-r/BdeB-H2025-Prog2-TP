@@ -18,6 +18,7 @@ public class YouDied extends InfoScreen{
         String instruction = "APPUYER ESPACE POUR SORTIR";
         StringBuilder lose = new StringBuilder();
 
+        //Image generee par ChatGPT
         lose.append("       _____\n");
         lose.append("      /     \\\n");
         lose.append("     | () () |\n");
