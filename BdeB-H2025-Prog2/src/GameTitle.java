@@ -16,7 +16,6 @@ public class GameTitle extends InfoScreen {
     @Override
     protected void dessiner() {
         String nomDuJeu = "Bondage and Masters";
-        String instruction = "APPUYER ESPACE POUR CONTINUER";
 
         StringBuilder castle = new StringBuilder();
 
@@ -39,8 +38,7 @@ public class GameTitle extends InfoScreen {
         EKOConsole.afficher((EKOConsole.largeur() - 34)/2, 3, castle.toString() ,EKOCouleur.JAUNE);
         EKOConsole.afficher((EKOConsole.largeur() - nomDuJeu.length())/2, 1, nomDuJeu,
                 EKOCouleur.ROUGE);
-        EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) /2, EKOConsole.hauteur() - 1, instruction,
-                EKOCouleur.GRIS_FONCE);
+        super.dessiner();
     }
 
 

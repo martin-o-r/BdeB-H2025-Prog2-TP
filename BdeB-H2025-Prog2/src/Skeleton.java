@@ -33,7 +33,7 @@ public class Skeleton extends Enemy {
     protected void mettreAJour(long deltaTemps) {
 
         waitBeforeMoving += deltaTemps;
-        if (waitBeforeMoving < 280) {
+        if (waitBeforeMoving < 350) {
             return;
         }
         waitBeforeMoving = 0;
@@ -64,7 +64,7 @@ public class Skeleton extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.BLANC);
+        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.RVB(243, 233, 208));
     }
 
 }

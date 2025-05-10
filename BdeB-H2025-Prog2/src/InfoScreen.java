@@ -1,3 +1,5 @@
+import eko.EKOConsole;
+import eko.EKOCouleur;
 import eko.EKOTouche;
 
 public abstract class InfoScreen extends ObjetJeu {
@@ -9,6 +11,13 @@ public abstract class InfoScreen extends ObjetJeu {
         -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyee" et "est relachee"
             -> enseignant recommande utiliser boolean pour faire le suivi
      https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
+     */
+
+    /*
+    Utilisation de System.exit(0) pour fermer la fenetre de la console une fois le jeu termine
+    https://stackoverflow.com/questions/30898773/how-do-i-use-system-exit-in-java
+    https://stackoverflow.com/questions/12117160/terminate-a-console-application-in-java
+    https://stackoverflow.com/questions/2434592/difference-in-system-exit0-system-exit-1-system-exit1-in-java
      */
 
     private static boolean spaceWasPressed = false; //detection si ESPACE a ete appuye au "frame antecedent"
@@ -41,6 +50,13 @@ public abstract class InfoScreen extends ObjetJeu {
          */
         if (spaceWasPressed && !spaceIsPressed) {
             GameProgressManager.next(this.etiquette);
+
+            if (GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_WON ||
+                GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_OVER) {
+                System.exit(0);
+            }
+
+
         }
 
         spaceWasPressed = spaceIsPressed; //reinitialise l'etat du frame avant a false
@@ -50,5 +66,10 @@ public abstract class InfoScreen extends ObjetJeu {
      * Method a redefinir dans les sous-classes qui permet d'afficher un objet
      */
     @Override
-    protected void dessiner() {}
+    protected void dessiner() {
+        String instruction = "APPUYER ESPACE POUR CONTINUER";
+
+        EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) / 2, EKOConsole.hauteur() - 1, instruction,
+                EKOCouleur.GRIS_FONCE);
+    }
 }
