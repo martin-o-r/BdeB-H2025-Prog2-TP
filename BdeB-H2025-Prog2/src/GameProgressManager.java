@@ -5,7 +5,7 @@ public abstract class GameProgressManager{
     private static ObjetJeu currentScreen;
 
     /**
-     * Method qui initialise la console EKO
+     * Méthode qui initialise la console EKO
      */
     public static void initialiseEKO() {
         EKO.initialiser("Bondage and Master", 61, 21);
@@ -15,7 +15,7 @@ public abstract class GameProgressManager{
     }
 
     /**
-     * Method qui fait commencer la musique de fond qui jouera en boucle tout au long du deroulement du jeu
+     * Méthode qui débute la musique de fond qui jouera en boucle tout au long du déroulement du jeu
      */
     private static void playSoundtrack() {
         EKOSon backgroundMusic = EKOAudio.charger("audio/685349__zhr__exploration-music-loop_low.wav");
@@ -23,19 +23,17 @@ public abstract class GameProgressManager{
     }
 
     /**
-     * Debut du deroulement du jeu. Il commence avec l'affichage de l'auteur, du nom du jeu et des instructions
+     * Début du déroulement du jeu. Il commence avec l'affichage de l'auteur, du nom du jeu et des instructions
      */
     public static void startGame() {
         currentScreen = new Author();
     }
 
     /**
-     * Method qui permet de gerer le sequencage des ecrans intro/niveaux/outro
-     * @param etiquette Identifie l'etiquette du niveau/page actuel
+     * Méthode qui permet de gérer le sequencage des écrans intro/niveaux/outro
+     * @param etiquette Identifie l'étiquette du niveau/page actuel
      */
     public static void next(Etiquette etiquette) {
-
-        //a revoir pour lier avec intro screens
 
         switch(etiquette) {
             case AUTHOR :
@@ -67,24 +65,28 @@ public abstract class GameProgressManager{
         }
     }
 
+    /**
+     * Méthode qui permet de détruire le currentScreen puis de creer le prochain écrans/niveaux
+     * @param newScreen
+     */
     private static void updateScreen(ObjetJeu newScreen) {
-        //Detruire la page precedente
-        currentScreen.detruire(); //les pages niveaux ont leur propre redefinition pour .detruire()
+        //Détruire la page précédente
+        currentScreen.detruire(); //les niveaux ont leur propre redéfinition pour .detruire()
 
         ExitDoor.lockDoor();
 
-        //Reassigner currentScreen a la nouvelle page (intro ou niveau)
+        //Réassigner currentScreen à la nouvelle page (intro ou niveau)
         currentScreen = newScreen;
     }
 
     /**
-     * Methode qui permet de reinitialiser un niveau lorsqu'un jouer entre en contacte avec un ennemie.
-     * On efface l'efface l'ecran actuel puis on le reload
+     * Méthode qui permet de réinitialiser un niveau lorsqu'un jouer entre en contacte avec un ennemie.
+     * On efface l'efface l'ecran actuel puis on le 'recharche'
      */
     public static void restartLevel() {
-        currentScreen.detruire(); //on efface le niveau ce qui est affiche
+        currentScreen.detruire(); //on efface le niveau qui est affiché
 
-        ExitDoor.lockDoor(); //on s'assure que la porte de sortie soit verouillee au debut du niveau
+        ExitDoor.lockDoor(); //on s'assure que la porte de sortie soit verouillée à niveau
 
         if (currentScreen instanceof LevelFileReader) { //on teste si l'ecran actuel est un niveau pour rappeler les
             // memes parametres
@@ -95,7 +97,7 @@ public abstract class GameProgressManager{
         }
     }
 
-    //accesseur
+    //Accesseur
     public static ObjetJeu getCurrentScreen() { return currentScreen; }
 
 }
