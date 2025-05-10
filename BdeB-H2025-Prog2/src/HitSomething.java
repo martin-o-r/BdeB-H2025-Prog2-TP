@@ -26,8 +26,8 @@ public abstract class HitSomething {
 
         if ((entryDoor.getX() == x && entryDoor.getY() == y) ||
                 (exitDoor.getX() == x && exitDoor.getY() == y)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

@@ -8,8 +8,8 @@ public abstract class Ghost extends Enemy {
     private long waitBeforeMoving = 0;
     private int moveIncrementation = 1;
     /*
-    moveIncrementation permet de controler l'incrementation du deplacement du fantome (+1 == go down, -1 == go up).
-    J'ai essaye de declarer et d'initialiser a l'interieur de la methode mettreAJour, mais il n'y avait aucun effet
+    moveIncrementation permet de controler l'incrementation du déplacement du fantome (+1 == go down, -1 == go up).
+    J'ai essayé de déclarer et d'initialiser à l'interieur de la méthode mettreAJour, mais il n'y avait aucun effet
     sur le deplacement du fantome
      */
 
@@ -52,7 +52,7 @@ public abstract class Ghost extends Enemy {
         }
 
         if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
-            HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
+            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         } else {
