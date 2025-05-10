@@ -14,7 +14,7 @@ public class BondageAndMaster {
         GameProgressManager.initialiseEKO();
         GameProgressManager.startGame();
 
-        //Loop du jeu principal - No touch!
+        //Loop du jeu principal -> Ne pas toucher!
         long tempsAttente;
         long maintenant;
         long deltaTemps;
