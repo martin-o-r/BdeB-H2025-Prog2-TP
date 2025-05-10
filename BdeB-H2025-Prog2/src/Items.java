@@ -1,7 +1,7 @@
 public abstract class Items extends ObjetJeu {
 
     /**
-     * Constructeur pour instancier un ObjetJeu
+     * Constructeur pour instancier un Item du jeu.
      * @param nom Nom que portera l'objet de type Item
      * @param x Position X de l'objet
      * @param y Position Y de l'objet
@@ -12,14 +12,15 @@ public abstract class Items extends ObjetJeu {
     }
 
     /**
-     * Method que chaque sous-classes de Items devra implementer pour mettre a jour
+     * Méthode heritée de ObjetJeu, mais ne sera implementée dans chaque sous-classe, car les items Key et Potion n'ont
+     * pas besoin de se deplacer
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Method qui permet d'afficher l'icone de l'objet de type Items
+     * Méthode que chaque sous-classe devra implementer pour leur affichage respectif
      */
     @Override
     protected void dessiner() {}

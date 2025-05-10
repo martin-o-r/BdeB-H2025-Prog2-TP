@@ -18,16 +18,7 @@ public class Potion extends Items {
     }
 
     /**
-     * Methode non implementee, car la pation ne se de place pas
-     * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
-     */
-    @Override
-    protected void mettreAJour(long deltaTemps) {
-
-    }
-
-    /**
-     * Method qui permet l'affichage de l'icone de la potion
+     * Méthode qui permet l'affichage de l'icone de la potion
      */
     @Override
     protected void dessiner() {
