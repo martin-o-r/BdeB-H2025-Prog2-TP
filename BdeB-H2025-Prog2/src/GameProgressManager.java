@@ -4,6 +4,11 @@ public abstract class GameProgressManager{
 
     private static ObjetJeu currentScreen;
 
+    //Attributs pour les effets sonores
+    private final static EKOSon GAME_WON = EKOAudio.charger("audio/applause2_x.wav");
+    private final static EKOSon GAME_LOST = EKOAudio.charger("audio/scream2.wav");
+    private final static EKOSon BACKGROUND_MUSIC = EKOAudio.charger("audio/city-bgm-336601.wav");
+
     /**
      * Méthode qui initialise la console EKO
      */
@@ -18,8 +23,7 @@ public abstract class GameProgressManager{
      * Méthode qui débute la musique de fond qui jouera en boucle tout au long du déroulement du jeu
      */
     private static void playSoundtrack() {
-        EKOSon backgroundMusic = EKOAudio.charger("audio/city-bgm-336601.wav");
-        EKOAudio.jouer(backgroundMusic, true);
+        EKOAudio.jouer(BACKGROUND_MUSIC, true);
     }
 
     /**
@@ -56,8 +60,12 @@ public abstract class GameProgressManager{
                 break;
             case LEVEL4 :
                 updateScreen(new YouWon());
+                EKOAudio.arreter(BACKGROUND_MUSIC);
+                EKOAudio.jouer(GAME_WON);
                 break;
             case GAME_OVER :
+                EKOAudio.arreter(BACKGROUND_MUSIC);
+                EKOAudio.jouer(GAME_LOST);
                 updateScreen(new YouDied());
                 break;
             default :

@@ -49,11 +49,11 @@ public abstract class InfoScreen extends ObjetJeu {
           déterminer que la touche ESPACE a été appuyée rien qu'une fois.
          */
         if (spaceWasPressed && !spaceIsPressed) {
-            GameProgressManager.next(this.etiquette);
-
             if (GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_WON ||
                 GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_OVER) {
                 System.exit(0);
+            } else {
+                GameProgressManager.next(this.etiquette);
             }
         }
         spaceWasPressed = spaceIsPressed; //réinitialise l'etat du frame avant à false

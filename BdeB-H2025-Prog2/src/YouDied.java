@@ -1,5 +1,7 @@
+import eko.EKOAudio;
 import eko.EKOConsole;
 import eko.EKOCouleur;
+import eko.EKOSon;
 
 public class YouDied extends InfoScreen{
 
