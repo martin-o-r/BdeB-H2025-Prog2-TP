@@ -6,15 +6,15 @@ public abstract class InfoScreen extends ObjetJeu {
 
 
     /*
-    Informations supplementaires sur KeyListener
+    Informations supplémentaires sur KeyListener
     https://stackoverflow.com/questions/10876491/how-to-use-keylistener
-        -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyee" et "est relachee"
-            -> enseignant recommande utiliser boolean pour faire la detection quand la touche est relachee
+        -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyée" et "est relachée"
+            -> enseignant recommande d'utiliser boolean pour faire la detection quand la touche est relachée
      https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
      */
 
     /*
-    Utilisation de System.exit(0) pour fermer la fenetre de la console une fois le jeu termine
+    Utilisation de System.exit(0) pour fermer la fenêtre de la console une fois le jeu terminé
     https://stackoverflow.com/questions/30898773/how-do-i-use-system-exit-in-java
     https://stackoverflow.com/questions/12117160/terminate-a-console-application-in-java
     https://stackoverflow.com/questions/2434592/difference-in-system-exit0-system-exit-1-system-exit1-in-java
@@ -28,14 +28,14 @@ public abstract class InfoScreen extends ObjetJeu {
      * @param name Nom donne a l'objet
      * @param x Position X de l'objet
      * @param y Position Y de l'objet
-     * @param etiquette Etiquette qui determine le type d'objet
+     * @param etiquette Etiquette qui détermine le type d'objet
      */
     InfoScreen(String name, int x, int y, Etiquette etiquette) {
         super(name, x, y, etiquette);
     }
 
     /**
-     * Methode qui sert a faire defiler les ecrans d'affichage principaux
+     * Méthode qui sert a faire défiler les ecrans d'affichage principaux
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -44,9 +44,9 @@ public abstract class InfoScreen extends ObjetJeu {
 
         /*
         Logique :
-        Si la touche ESPACE a ete appuye au dernier frame (spaceWasPressed) et maintenant la touche n'est pas appuyee
-         (spaceIsPressed), alors cela implique que la touche ESPACE a ete appuye relachee. Donc, l'ensemble permet de
-          determiner que la touche ESPACE a ete appuye rien qu'une fois.
+        Si la touche ESPACE a été appuyé au dernier frame (spaceWasPressed) et maintenant la touche n'est pas appuyée
+         (spaceIsPressed), alors cela implique que la touche ESPACE a été appuye relachée. Donc, l'ensemble permet de
+          déterminer que la touche ESPACE a été appuyée rien qu'une fois.
          */
         if (spaceWasPressed && !spaceIsPressed) {
             GameProgressManager.next(this.etiquette);
@@ -55,15 +55,12 @@ public abstract class InfoScreen extends ObjetJeu {
                 GameProgressManager.getCurrentScreen().etiquette == Etiquette.GAME_OVER) {
                 System.exit(0);
             }
-
-
         }
-
-        spaceWasPressed = spaceIsPressed; //reinitialise l'etat du frame avant a false
+        spaceWasPressed = spaceIsPressed; //réinitialise l'etat du frame avant à false
     }
 
     /**
-     * Method a redefinir dans les sous-classes qui permet d'afficher un objet
+     * Méthode a redéfinir dans les sous-classes, permet l'affichage des écrans principaux
      */
     @Override
     protected void dessiner() {
