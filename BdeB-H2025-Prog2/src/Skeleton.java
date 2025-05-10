@@ -53,8 +53,8 @@ public class Skeleton extends Enemy {
             nextMoveY++;
         }
 
-        //Skeleton suit le joueur, donc pas de risque qu'il entre en contact avec une porte
-        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY)) {
+        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
+            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         }
