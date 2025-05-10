@@ -39,8 +39,6 @@ public class Player extends ObjetJeu implements Collisionnable{
             nextMoveY++;
         }
 
-        boolean hitSomething = false;
-
         ObjetJeu entryDoorTemp = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
         int entryDoorX = entryDoorTemp.getX();
         int entryDoorY = entryDoorTemp.getY();
@@ -49,11 +47,11 @@ public class Player extends ObjetJeu implements Collisionnable{
         int exitDoorX = exitDoorTemp.getX();
         int exitDoorY = exitDoorTemp.getY();
 
-        hitSomething = HitSomething.didWeHitAWall(nextMoveX, nextMoveY);
+        boolean hitSomething = HitSomething.didWeHitAWall(nextMoveX, nextMoveY);
 
         if ((entryDoorX == nextMoveX && entryDoorY == nextMoveY) || //joueur ne peut pas traverser la porte d'entree
                 (ExitDoor.isDoorLocked() && (exitDoorX == nextMoveX && exitDoorY == nextMoveY))) {
-            //joueur ne pas traverser la porte de sortie si elle n'est pas deverouillee
+            //joueur ne pas traverser la porte de sortie si elle n'est pas deverouillée
             hitSomething = true;
         }
 
@@ -67,7 +65,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     }
 
     /**
-     * Méthode qui permet d'afficher l'icon du joueur
+     * Méthode qui permet d'afficher l'icone du joueur
      */
     @Override
     protected void dessiner() {
@@ -75,7 +73,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     }
 
     /**
-     * Méthod qui permet de gérer les collisions
+     * Méthode qui permet de gérer les collisions
      * @param autre Autre objet de jeu impliqué dans la collision
      */
     @Override
