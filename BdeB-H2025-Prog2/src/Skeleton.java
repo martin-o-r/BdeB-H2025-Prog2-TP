@@ -33,7 +33,7 @@ public class Skeleton extends Enemy {
     protected void mettreAJour(long deltaTemps) {
 
         waitBeforeMoving += deltaTemps;
-        if (waitBeforeMoving < 280) {
+        if (waitBeforeMoving < 350) {
             return;
         }
         waitBeforeMoving = 0;
