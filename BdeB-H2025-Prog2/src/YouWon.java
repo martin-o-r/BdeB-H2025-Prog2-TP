@@ -15,7 +15,7 @@ public class YouWon extends InfoScreen{
      */
     @Override
     protected void dessiner() {
-        String instruction = "APPUYER ESPACE POUR SORTIR";
+        String instruction = "APPUYER SUR ESPACE POUR SORTIR";
         StringBuilder win = new StringBuilder();
 
         //image generee par ChatGPT

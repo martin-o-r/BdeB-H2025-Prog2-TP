@@ -15,7 +15,7 @@ public class YouDied extends InfoScreen{
      */
     @Override
     public void dessiner() {
-        String instruction = "APPUYER ESPACE POUR SORTIR";
+        String instruction = "APPUYER SUR ESPACE POUR SORTIR";
         StringBuilder lose = new StringBuilder();
 
         //Image generee par ChatGPT
