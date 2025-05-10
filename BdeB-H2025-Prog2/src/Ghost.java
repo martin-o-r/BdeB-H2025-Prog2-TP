@@ -53,12 +53,31 @@ public abstract class Ghost extends Enemy {
             nextMoveY += moveIncrementation;
         }
 
-        if (!HitAWall.didWeHitAWall(nextMoveX, nextMoveY)) {
+        if (isNextMoveValid(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         } else {
             moveIncrementation *= -1;
         }
+    }
+
+    /**
+     * Methode qui permet de determiner si le prochain deplacement du fantome est valide ou non
+     * @param nextX Prochain position X du fantome
+     * @param nextY Prochaine position Y du fantome
+     * @return Boolean qui determine si le deplacement est possible
+     */
+    private boolean isNextMoveValid(int nextX, int nextY) {
+        ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
+        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+
+        if (HitAWall.didWeHitAWall(nextX, nextY) ||
+                (entryDoor.getX() == nextX && entryDoor.getY() == nextY) ||
+                (exitDoor.getX() == nextX && exitDoor.getY() == nextY)) {
+            return false;
+
+        }
+         return true;
     }
 
     /**
