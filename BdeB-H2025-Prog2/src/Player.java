@@ -89,8 +89,6 @@ public class Player extends ObjetJeu implements Collisionnable{
                 ExitDoor.unlockDoor();
                 EKOAudio.jouer(KEY_CAPTURED);
                 break;
-//            case Etiquette.LANGUE :
-//                //pas de break; pour qu'il soit automtiquement detecte comme un enemie
             case Etiquette.ENEMY :
                 LifeIndicator.looseALife();
                 EKOAudio.jouer(ENEMY_TOUCHED);
