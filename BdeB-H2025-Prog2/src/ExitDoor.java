@@ -57,9 +57,9 @@ public class ExitDoor extends ObjetJeu {
     @Override
     protected void dessiner() {
         if (doorLocked) {
-            EKOConsole.afficher(getX(), getY(), lockedDoor, EKOCouleur.JAUNE);
+            EKOConsole.afficher(getX(), getY(), lockedDoor, EKOCouleur.RVB(255, 192, 0));
         } else {
-            EKOConsole.afficher(getX(), getY(), unlockedDoor, EKOCouleur.ROSE);
+            EKOConsole.afficher(getX(), getY(), unlockedDoor, EKOCouleur.RVB(255, 20, 147));
         }
     }
 
