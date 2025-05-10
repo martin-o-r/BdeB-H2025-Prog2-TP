@@ -7,7 +7,7 @@ import java.util.Random;
 public class Fire extends Enemy {
 
     //Attributs
-    private final EKOChaine FIRE_ICON = new EKOChaine("\uE3BF", EKOCouleur.ORANGE);
+    private final EKOChaine FIRE_ICON = new EKOChaine("\uE3BF", EKOCouleur.RVB(255, 92, 0));
 
     /**
      * Constructeur qui permet d'instancier le feu
