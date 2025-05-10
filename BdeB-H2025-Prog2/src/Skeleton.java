@@ -18,7 +18,7 @@ public class Skeleton extends Enemy {
     }
 
     /*
-    La logic pour suivre le Player est explique dans un des commentaires de cet affichage reddit
+    La logique pour suivre le Player est expliqué dans un des commentaires de cet affichage reddit :
     https://www.reddit.com/r/javahelp/comments/bqlko1/how_to_make_object_follow_another_object/
 
     Le concept de "return" dans une methode void (en voulant utiliser un path finder A*)
@@ -26,7 +26,7 @@ public class Skeleton extends Enemy {
      */
 
     /**
-     * Method qui permet a l'objet de type Skeleton de se deplacer vers la position du Player
+     * Méthode qui permet à l'objet de type Skeleton de se déplacer vers la position du Player
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -60,7 +60,7 @@ public class Skeleton extends Enemy {
     }
 
     /**
-     * Method qui permet de dessinger l'objet de type Skeleton lors du niveau de jeu
+     * Méthode qui permet de dessiner l'objet de type Skeleton
      */
     @Override
     protected void dessiner() {
