@@ -1,8 +1,6 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-import java.util.ArrayList;
-
 public abstract class Ghost extends Enemy {
 
     //Attributs
@@ -27,12 +25,12 @@ public abstract class Ghost extends Enemy {
     }
 
     /*
-    Aide pour developper la logique pour le deplacement sur l'axe X et Y, defini par chaque sous-class de Ghost
+    Aide pour développer la logique pour le deplacement sur l'axe X et Y, defini par chaque sous-class de Ghost
     https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
      */
 
     /**
-     * Method qui met a jour le deplacement de l'objet de type Ghost
+     * Méthode qui met à jour le déplacement de l'objet de type Ghost
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -53,31 +51,13 @@ public abstract class Ghost extends Enemy {
             nextMoveY += moveIncrementation;
         }
 
-        if (isNextMoveValid(nextMoveX, nextMoveY)) {
+        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
+            HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         } else {
             moveIncrementation *= -1;
         }
-    }
-
-    /**
-     * Methode qui permet de determiner si le prochain deplacement du fantome est valide ou non
-     * @param nextX Prochain position X du fantome
-     * @param nextY Prochaine position Y du fantome
-     * @return Boolean qui determine si le deplacement est possible
-     */
-    private boolean isNextMoveValid(int nextX, int nextY) {
-        ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
-        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-
-        if (HitAWall.didWeHitAWall(nextX, nextY) ||
-                (entryDoor.getX() == nextX && entryDoor.getY() == nextY) ||
-                (exitDoor.getX() == nextX && exitDoor.getY() == nextY)) {
-            return false;
-
-        }
-         return true;
     }
 
     /**

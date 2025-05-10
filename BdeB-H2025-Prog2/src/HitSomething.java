@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public abstract class HitAWall {
+public abstract class HitSomething {
 
     /**
      * Method qui permet de determiner si le prochain deplacement d'un objet est le meme que l'emplacement d'un mur
@@ -18,5 +18,16 @@ public abstract class HitAWall {
         }
 
         return false;
+    }
+
+    public static boolean didWeHitADoor(int x, int y) {
+        ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
+        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
+
+        if ((entryDoor.getX() == x && entryDoor.getY() == y) ||
+                (exitDoor.getX() == x && exitDoor.getY() == y)) {
+            return false;
+        }
+        return true;
     }
 }

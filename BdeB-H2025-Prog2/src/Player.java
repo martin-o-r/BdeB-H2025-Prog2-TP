@@ -50,7 +50,7 @@ public class Player extends ObjetJeu implements Collisionnable{
         int exitDoorY = exitDoorTemp.getY();
 
 
-        hitSomething = HitAWall.didWeHitAWall(nextMoveX, nextMoveY);
+        hitSomething = HitSomething.didWeHitAWall(nextMoveX, nextMoveY);
 
         if ((entryDoorX == nextMoveX && entryDoorY == nextMoveY) || //joueur ne peut pas traverser la porte d'entree
                 (ExitDoor.isDoorLocked() && (exitDoorX == nextMoveX && exitDoorY == nextMoveY))) {

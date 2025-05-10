@@ -148,7 +148,7 @@ public class Insect extends Enemy{
      * @return Boolean qui determine si l'insecte peut avancer ou non
      */
     private boolean isNextMoveValid(int x, int y) {
-        if (HitAWall.didWeHitAWall(x, y)) {
+        if (HitSomething.didWeHitAWall(x, y)) {
             return false;
         }
 
