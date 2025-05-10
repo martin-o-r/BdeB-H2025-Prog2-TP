@@ -67,7 +67,7 @@ public abstract class Ghost extends Enemy {
     protected abstract boolean moveOnXAxis();
 
     /**
-     * Method qui permet de dessiner l'objet de type Ghost lors de l'actualisation du niveau de jeu
+     * Méthode qui permet de dessiner l'objet de type Ghost lors de l'actualisation du niveau de jeu
      */
     @Override
     protected void dessiner() {
