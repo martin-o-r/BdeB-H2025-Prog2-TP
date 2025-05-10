@@ -1,4 +1,3 @@
-import eko.EKO;
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class LevelFileReader extends ObjetJeu{
     /*
-    Plus d'information sur la File.readAllLines() method
+    Plus d'information sur la méthode File.readAllLines()
     https://medium.com/@AlexanderObregon/javas-files-readalllines-method-explained-14312314c1c4
      */
 
@@ -33,12 +32,12 @@ public class LevelFileReader extends ObjetJeu{
         this.levelFilePath = levelFilePath;
         this.levelCounter = levelCounter;
         lines = createArrayList(levelFilePath);
-        printLevel();
+        loadLevel();
     }
 
     /**
-     * Method qui permet de remplir la liste everyGameObjects avec les objets du jeu
-     * @param levelPathFile levels/level_02
+     * Méthode qui permet de remplir la liste everyGameObjects avec les objets du jeu d'un niveau
+     * @param levelPathFile Chemin vers les fichiers textes des niveaux
      * @return Une liste contenant tous les objets necessaires d'un niveau
      */
     private ArrayList<String> createArrayList(String levelPathFile) {
@@ -55,12 +54,12 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Method qui permet d'afficher et de mettre a jour chaque niveaux ainsi que les ObjetsJeu necessaires pour un
+     * Méthode qui permet d'instancier les ObjetJeux et les placer dans le niveau
      * niveau
      */
-    public void printLevel() {
+    public void loadLevel() {
 
-        //type static qui suit le joueur au courant de la progression (a travers les niveaux)
+        //type static qui suit le joueur au courant de la progression
         everyGameObjects.add(new LifeIndicator(0,0));
 
         int y = 0;
@@ -129,8 +128,8 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Redefinition de la methode mettre a jour qui permet de determiner si le jeu est fini quand le joueur a perdu
-     * toutes ses vies disponibles.
+     * Méthode qui permet de déterminer si le jeu est fini quand le joueur a perdu
+     * toutes ses vies
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -142,19 +141,19 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Methode qui est redefinie pour detruire tous les objets inclus dans un niveau ainsi
+     * Méthode qui est redéfinie pour detruire tous les objets inclus dans un niveau ainsi
      * que l'objet niveau lui-meme
      */
     @Override
     public void detruire() {
-        for (ObjetJeu objects : everyGameObjects) {
-            objects.detruire();
+        for (ObjetJeu object : everyGameObjects) {
+            object.detruire();
         }
         super.detruire();
     }
 
     /**
-     * Method qui permet de dessiner les informations des niveaux
+     * Méthode qui permet d'afficher le niveau actuel
      */
     @Override
     protected void dessiner() {
