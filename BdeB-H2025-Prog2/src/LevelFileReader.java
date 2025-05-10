@@ -1,3 +1,4 @@
+import eko.EKO;
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
@@ -124,7 +125,8 @@ public class LevelFileReader extends ObjetJeu{
     }
 
     /**
-     * Redefinition de la methode mettre a jour qui detecte si le joueur est mort durnat le jeu
+     * Redefinition de la methode mettre a jour qui permet de determiner si le jeu est fini quand le joueur a perdu
+     * toutes ses vies disponibles.
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override

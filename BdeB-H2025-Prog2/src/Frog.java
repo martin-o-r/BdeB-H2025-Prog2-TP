@@ -11,7 +11,13 @@ public class Frog extends Enemy {
     /*
     Logique pour creer une animation en java
     https://www.svetprogramiranja.com/animations_in_java_example.html
-        -> besoin d'un timer pour controler le deplacement de la langue?
+        -> besoin d'un "Timer" pour controler le deplacement de la langue?
+            -> peut-etre utiliser un autre attribut pour controler la langue?
+        -> en plus de celui deja utilise pour ralentir les mouvements?
+    https://codingtechroom.com/tutorial/java-implementing-game-timers-java-2d-game-development?utm_source=chatgpt.com
+        ->Timer est une classe en soi! Non non, pas aller la...
+        -> principe d'un chronometre qui marque le debut d'une action puis un autre chronometre qui marque la fin
+        -> durant ce lapse, on implemente ce qui est desire
      */
 
     //Attributs
