@@ -15,10 +15,10 @@ public class GameInstructions extends InfoScreen {
      */
     @Override
     protected void dessiner() {
-        String commandes = "- Utilisez les fleches pour vous deplacer -";
-        String cle = "- Recuperez les cerises pour deverouiller les portes -";
-        String potion = "- Les potions font gagner des coeurs -";
-        String ennemi = "- Evitez de trop coller les ennemis -";
+        String commandes = "- Utilisez les flèches pour vous deplacer -";
+        String cle = "- Récupérez les cerises pour déverouiller les portes -";
+        String potion = "- Les beignes remplissent les pillulles -";
+        String ennemi = "- Évitez de trop coller les ennemis -";
         String debut = "Que le plaisir commence! :')";
         String instruction = "APPUYER ESPACE POUR COMMENCER";
 
