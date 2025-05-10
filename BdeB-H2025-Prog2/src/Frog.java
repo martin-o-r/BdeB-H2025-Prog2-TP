@@ -53,12 +53,12 @@ public abstract class Frog extends Enemy {
     protected void mettreAJour(long deltaTemps) {
         //Buffer qui permet de ralentir le mettreAJour
         waitBeforeMoving += deltaTemps;
-        tongueTimer += deltaTemps;
-
-        if(waitBeforeMoving < 100) {
+        if(waitBeforeMoving < 30) {
             return;
         }
         waitBeforeMoving = 0;
+
+        tongueTimer += deltaTemps;
 
         if (tongueTimer < 800) { //extension de la langue
             extendedTongue = true;
@@ -86,6 +86,10 @@ public abstract class Frog extends Enemy {
          */
         tonguePositions.clear();
 
+        /*
+        Selon la l'orientation de la grenouille, les positions de la langue vont etre soit a droite de la grenouille
+        ou a gauche
+         */
         for (int i = 1; i <= tongueLength; i++) {
             tonguePositions.add(new Position(facingRight()? position.x + i : position.x - i, position.y, 0));
         }
