@@ -61,7 +61,7 @@ public abstract class Ghost extends Enemy {
     }
 
     /**
-     * Method qui permet de determiner si l'objet de type Ghost se deplace sur l'axe des X ou sur l'axe des Y
+     * Méthode qui permet de déterminer si l'objet de type Ghost se déplace sur l'axe des X ou sur l'axe des Y
      * @return Boolean qui permet de determiner l'axe de deplacement
      */
     protected abstract boolean moveOnXAxis();
