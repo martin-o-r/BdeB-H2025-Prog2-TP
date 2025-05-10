@@ -148,37 +148,6 @@ public class Insect extends Enemy{
     }
 
     /**
-     * Method qui verifie si la prochaine position de deplacement est valide
-     * versus un mur, la porte de sortie ou la porte d'entree
-     * @param x Prochaine position x de l'insecte
-     * @param y Prochaine position y de l'insecte
-     * @return Boolean qui determine si l'insecte peut avancer ou non
-     */
-    private boolean isNextMoveValid(int x, int y) {
-        if (HitSomething.didWeHitAWall(x, y)) {
-            return false;
-        }
-
-        ObjetJeu exitDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-        int exitDoorX = exitDoor.getX();
-        int exitDoorY = exitDoor.getY();
-
-        if (x == exitDoorX && y == exitDoorY) {
-            return false;
-        }
-
-        ObjetJeu entryDoor = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
-        int entryDoorX = entryDoor.getX();
-        int entryDoorY = entryDoor.getY();
-
-        if (x == entryDoorX && y == entryDoorY) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Methode qui verifie s'il y un mur a gauche, par rapport a la direction de l'insecte et ajuste la trajectoire
      * pour continuer a longer le mur
      */
@@ -200,7 +169,8 @@ public class Insect extends Enemy{
         Si ce n'est pas possible (false), alors on "ne tourne pas" (true). On sort de la methode.
         Si c'est possible (true), alors on tourne (false - permet de changer la valeur direction).
          */
-        if (!isNextMoveValid(xLeft, yLeft)) {
+        if (HitSomething.didWeHitAWall(xLeft, yLeft) ||
+            HitSomething.didWeHitADoor(xLeft, yLeft)) {
             return;
         }
 
@@ -232,9 +202,11 @@ public class Insect extends Enemy{
         }
 
         //si mur est a droite, on continue a avancer
-        if (!isNextMoveValid(xRight, yRight)) {
+        if (HitSomething.didWeHitAWall(xRight, yRight) ||
+            HitSomething.didWeHitADoor(xRight, yRight)) {
             return;
         }
+
 
         //si pas de mur a droit, on tourne a droite pour continuer a longer un mur
         direction = rightDirection;
