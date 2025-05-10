@@ -77,7 +77,7 @@ public class Player extends ObjetJeu implements Collisionnable{
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(255,158,158));
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(219,255,60));
     }
 
     /**
