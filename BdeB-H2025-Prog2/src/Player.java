@@ -10,6 +10,7 @@ public class Player extends ObjetJeu implements Collisionnable{
 
     //Attributs propre a l'objet
     private static final String ICON = "\uEF0C";
+    private long waitBeforeMoving = 0;
 
     /**
      * Constructeur de l'objet de type Player
@@ -26,6 +27,12 @@ public class Player extends ObjetJeu implements Collisionnable{
      */
     @Override
     protected void mettreAJour(long deltaTemps) {
+        waitBeforeMoving += deltaTemps;
+        if (waitBeforeMoving < 25) {
+            return;
+        }
+        waitBeforeMoving = 0;
+
 
         int nextMoveX = position.x;
         int nextMoveY = position.y;
