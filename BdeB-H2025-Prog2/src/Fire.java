@@ -7,8 +7,7 @@ import java.util.Random;
 public class Fire extends Enemy {
 
     //Attributs
-    private static final String icon = "\uE3BF";
-    private final EKOChaine fireIcon = new EKOChaine(icon, EKOCouleur.ORANGE);
+    private final EKOChaine FIRE_ICON = new EKOChaine("\uE3BF", EKOCouleur.ORANGE);
 
     /**
      * Constructeur qui permet d'instancier le feu
@@ -27,7 +26,7 @@ public class Fire extends Enemy {
     protected void mettreAJour(long deltaTemps) {
         Random random = new Random();
         if (random.nextInt(1, 5 + 1) == 1) {
-            fireIcon.retourner();
+            FIRE_ICON.retourner();
         }
     }
 
@@ -36,8 +35,8 @@ public class Fire extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(getX(), getY(), fireIcon);
-        fireIcon.retourner();
+        EKOConsole.afficher(position.x, position.y, FIRE_ICON);
+        FIRE_ICON.retourner();
     }
 
 

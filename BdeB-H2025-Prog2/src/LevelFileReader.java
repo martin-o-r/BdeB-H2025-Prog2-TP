@@ -113,9 +113,13 @@ public class LevelFileReader extends ObjetJeu{
                         Insect insect = new Insect(i, y);
                         everyGameObjects.add(insect);
                         break;
-                    case 'R' :
-                        Frog frog = new Frog(i, y);
-                        everyGameObjects.add(frog);
+                    case 'C' :
+                        FrogLookingRight frogLookingRight = new FrogLookingRight(i, y);
+                        everyGameObjects.add(frogLookingRight);
+                        break;
+                    case 'V' :
+                        FrogLookingLeft frogLookingLeft = new FrogLookingLeft(i, y);
+                        everyGameObjects.add(frogLookingLeft);
                         break;
                     default :
                         break;

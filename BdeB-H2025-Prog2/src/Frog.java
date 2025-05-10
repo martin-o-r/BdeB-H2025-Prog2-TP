@@ -1,7 +1,4 @@
-import eko.EKOAudio;
-import eko.EKOConsole;
-import eko.EKOCouleur;
-import eko.EKOSon;
+import eko.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +20,19 @@ public abstract class Frog extends Enemy {
      */
 
     //Attributs
-    private final String ICON = "\uEDF8";
-    private final String TONGUE1 = "\u2500"; //corps de la langue
-    private final String TONGUE2 = "\u257C"; //pointe de la langue
+    EKOCouleur color = EKOCouleur.RVB(34, 139, 34);
+    protected final EKOChaine ICON = new EKOChaine("\uEDF8", color) ;
+    protected final EKOChaine TONGUE1 = new EKOChaine("\u2500", color); //corps de la langue
+    protected final EKOChaine TONGUE2 = new EKOChaine("\u257C", color); //pointe de la langue
 
     private long waitBeforeMoving = 0;
 
-    private boolean extendedTongue = false;
-    private int tongueLength = 0;
-    private final int MAX_TONGUE_LENGTH = 3;
+    protected boolean extendedTongue = false;
+    protected int tongueLength = 0;
+    protected final int MAX_TONGUE_LENGTH = 3;
     private long tongueTimer = 0;
 
-    private List<Position> tonguePositions = new ArrayList<>(); //utilisation de classe Position
+    private List<Position> tonguePositions = new ArrayList<>(); //utilisation de la classe Position
 
     private static EKOSon ENEMY_TOUCHED = EKOAudio.charger("audio/651625__martcraft__fail_cut.wav");
 
@@ -88,14 +86,22 @@ public abstract class Frog extends Enemy {
          */
         tonguePositions.clear();
 
-        /*
+        if (facingRight()) {
+            /*
         On detecte que la langue est deployee, puis on va chercher la position de chacune des parties de la langue
          */
-        if (extendedTongue) {
+            if (extendedTongue) {
+                for (int i = 1; i <= tongueLength; i++) {
+                    tonguePositions.add(new Position(position.x + i, position.y, 0));
+                }
+            }
+        } else {
             for (int i = 1; i <= tongueLength; i++) {
-                tonguePositions.add(new Position(position.x + i, position.y, 0));
+                tonguePositions.add(new Position(position.x - i, position.y, 0));
             }
         }
+
+
 
         /*
         J'ai du implementer une nouvelle methode qui detecte la collision, car Collisionable ne detecte qu'avec
@@ -104,7 +110,11 @@ public abstract class Frog extends Enemy {
         checkTongueCollision();
     }
 
-    protected abstract boolean facingLeft();
+    /**
+     *
+     * @return Boolean qui determine quelle cote la grenouille regarde
+     */
+    protected abstract boolean facingRight();
 
     /**
      * Methode qui permet de determiner une collision entre une partie de la langue de la grenouille et le joueur
@@ -128,9 +138,8 @@ public abstract class Frog extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOCouleur color = EKOCouleur.RVB(34, 139, 34);
 
-        EKOConsole.afficher(position.x, position.y, ICON, color); //dessin de la grenouille
+        EKOConsole.afficher(position.x, position.y, ICON); //dessin de la grenouille
 
         if (extendedTongue) {
             /*
@@ -138,11 +147,13 @@ public abstract class Frog extends Enemy {
              */
             for (int i = 1; i <= tongueLength; i++) {
                 if (i == MAX_TONGUE_LENGTH) {
-                    EKOConsole.afficher(position.x + i, position.y, TONGUE2, color);
+                    EKOConsole.afficher(facingRight()? position.x + i : position.x - i, position.y, TONGUE2);
                 } else {
-                    EKOConsole.afficher(position.x + i, position.y, TONGUE1, color);
+                    EKOConsole.afficher(facingRight()? position.x + i : position.x - i, position.y, TONGUE1);
                 }
             }
         }
+
+
     }
 }
