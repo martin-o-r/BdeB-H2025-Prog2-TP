@@ -11,7 +11,8 @@ public class Frog extends Enemy{
 
     //Attributs
     private final String ICON = "\uEDF8";
-
+    private final String TONGUE1 = "\u2500"; //corps de la langue
+    private final String TONGUE2 = "\u257C"; //pointe de la langue
 
     private long waitBeforeMoving = 0;
 
@@ -35,17 +36,18 @@ public class Frog extends Enemy{
         waitBeforeMoving += deltaTemps;
         tongueTimer += deltaTemps;
 
-        if(waitBeforeMoving < 50) {
+        if(waitBeforeMoving < 100) {
             return;
         }
         waitBeforeMoving = 0;
 
-        if (tongueTimer < 500) {
+        if (tongueTimer < 800) {
             extendedTongue = true;
             if (tongueLength < MAX_TONGUE_LENGTH) {
                 tongueLength++;
+
             }
-        } else if (tongueTimer < 1000) {
+        } else if (tongueTimer < 1300) {
             if (tongueTimer > 0) {
                 tongueLength--;
             }
@@ -66,7 +68,11 @@ public class Frog extends Enemy{
 
         if (extendedTongue) {
             for (int i = 1; i <= tongueLength; i++) {
-                EKOConsole.afficher(position.x + i, position.y, "-", color);
+                if (i == MAX_TONGUE_LENGTH) {
+                    EKOConsole.afficher(position.x + i, position.y, TONGUE2, color);
+                } else {
+                    EKOConsole.afficher(position.x + i, position.y, TONGUE1, color);
+                }
             }
         }
     }

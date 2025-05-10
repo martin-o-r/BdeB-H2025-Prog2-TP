@@ -8,11 +8,6 @@ public class FrogTongue extends Enemy{
     }
 
     @Override
-    protected void mettreAJour(long deltaTemps) {
-
-    }
-
-    @Override
     protected void dessiner() {
 
     }

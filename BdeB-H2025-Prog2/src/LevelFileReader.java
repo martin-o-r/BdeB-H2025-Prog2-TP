@@ -154,9 +154,6 @@ public class LevelFileReader extends ObjetJeu{
     protected void dessiner() {
         EKOConsole.afficher(EKOConsole.largeur() - 8, 0, "Salle " + String.format("%02d", levelCounter),
                 EKOCouleur.CYAN);
-
-        //utiliser enum pour acquererir le niveau
-        //moins de parametres c'est preferable - code d'ecriture
     }
 
     //accesseurs
