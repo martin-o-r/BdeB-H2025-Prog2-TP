@@ -18,7 +18,7 @@ public abstract class GameProgressManager{
      * Méthode qui débute la musique de fond qui jouera en boucle tout au long du déroulement du jeu
      */
     private static void playSoundtrack() {
-        EKOSon backgroundMusic = EKOAudio.charger("audio/685349__zhr__exploration-music-loop_low.wav");
+        EKOSon backgroundMusic = EKOAudio.charger("audio/city-bgm-336601.wav");
         EKOAudio.jouer(backgroundMusic, true);
     }
 
