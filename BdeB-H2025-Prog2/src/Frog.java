@@ -1,6 +1,9 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Frog extends Enemy{
 
     /*
@@ -20,6 +23,8 @@ public class Frog extends Enemy{
     private int tongueLength = 0;
     private final int MAX_TONGUE_LENGTH = 3;
     private long tongueTimer = 0;
+
+    private List<Position> tonguePositions = new ArrayList<>();
 
     /**
      * Constructeur de l'objet de type Frog
@@ -43,17 +48,22 @@ public class Frog extends Enemy{
 
         if (tongueTimer < 800) {
             extendedTongue = true;
+
             if (tongueLength < MAX_TONGUE_LENGTH) {
                 tongueLength++;
 
             }
+
         } else if (tongueTimer < 1300) {
+
             if (tongueTimer > 0) {
                 tongueLength--;
             }
+
             if (tongueLength == 0) {
                 extendedTongue = false;
             }
+
         } else {
             tongueTimer = 0;
         }
