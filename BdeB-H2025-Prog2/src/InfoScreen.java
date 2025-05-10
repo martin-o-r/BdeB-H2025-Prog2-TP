@@ -1,3 +1,5 @@
+import eko.EKOConsole;
+import eko.EKOCouleur;
 import eko.EKOTouche;
 
 public abstract class InfoScreen extends ObjetJeu {
@@ -64,5 +66,10 @@ public abstract class InfoScreen extends ObjetJeu {
      * Method a redefinir dans les sous-classes qui permet d'afficher un objet
      */
     @Override
-    protected void dessiner() {}
+    protected void dessiner() {
+        String instruction = "APPUYER ESPACE POUR CONTINUER";
+
+        EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) / 2, EKOConsole.hauteur() - 1, instruction,
+                EKOCouleur.GRIS_FONCE);
+    }
 }

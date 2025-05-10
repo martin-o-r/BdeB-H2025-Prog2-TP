@@ -26,5 +26,6 @@ public class YouDied extends InfoScreen{
         lose.append("D: VOUS ETES MORT! X.X"); //24 char
 
         EKOConsole.afficher((EKOConsole.largeur() -  24)/2, 6, lose.toString(), EKOCouleur.BLANC);
+        super.dessiner();
     }
 }

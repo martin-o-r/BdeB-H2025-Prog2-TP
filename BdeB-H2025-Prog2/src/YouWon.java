@@ -23,5 +23,6 @@ public class YouWon extends InfoScreen{
         win.append("  / \\\n");
 
         EKOConsole.afficher((EKOConsole.largeur() - 29)/2, EKOConsole.hauteur()/2, win.toString(), EKOCouleur.ROUGE);
+        super.dessiner();
     }
 }
