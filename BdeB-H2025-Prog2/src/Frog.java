@@ -6,7 +6,7 @@ import eko.EKOSon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frog extends Enemy implements Collisionnable{
+public class Frog extends Enemy {
 
     /*
     Logique pour creer une animation en java
@@ -78,9 +78,22 @@ public class Frog extends Enemy implements Collisionnable{
             }
         }
 
+        checkTongueCollision();
     }
-    
 
+    private void checkTongueCollision() {
+        ObjetJeu player = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Player");
+        int playerX = player.getX();
+        int playerY = player.getY();
+
+        for (Position place : tonguePositions) {
+            if (place.x == playerX && place.y == playerY) {
+                LifeIndicator.looseALife();
+                EKOAudio.jouer(ENEMY_TOUCHED);
+                GameProgressManager.restartLevel();
+            }
+        }
+    }
 
     @Override
     protected void dessiner() {
@@ -89,26 +102,15 @@ public class Frog extends Enemy implements Collisionnable{
         EKOConsole.afficher(position.x, position.y, ICON, color); //dessin de la grenouille
 
         if (extendedTongue) {
-            for (int i = 1; i <= tongueLength; i++) { //on commence a index 1 pour que la langue apparaisse devant la
-                // grenouille
+            /*
+            On comence a l'index 1 pour que la longue s'affiche devant la grnenouille
+             */
+            for (int i = 1; i <= tongueLength; i++) {
                 if (i == MAX_TONGUE_LENGTH) {
                     EKOConsole.afficher(position.x + i, position.y, TONGUE2, color);
                 } else {
                     EKOConsole.afficher(position.x + i, position.y, TONGUE1, color);
                 }
-            }
-        }
-    }
-
-    @Override
-    public void gererCollisionAvec(ObjetJeu autre) {
-
-        for (Position place : tonguePositions) {
-            if ((autre.etiquette == Etiquette.PLAYER) &&
-                (place.x == autre.getX() && place.y == autre.getY())) {
-                LifeIndicator.looseALife();
-                EKOAudio.jouer(ENEMY_TOUCHED);
-                GameProgressManager.restartLevel();
             }
         }
     }
