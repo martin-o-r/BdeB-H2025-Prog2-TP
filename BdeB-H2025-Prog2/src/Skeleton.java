@@ -64,7 +64,7 @@ public class Skeleton extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.BLANC);
+        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.RVB(243, 233, 208));
     }
 
 }
