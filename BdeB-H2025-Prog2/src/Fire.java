@@ -19,7 +19,7 @@ public class Fire extends Enemy {
     }
 
     /**
-     * Methode qui permet de mettre a jour le feu - inverse le feu par 1 chance sur 5 (effet un feu qui brule)
+     * Méthode qui permet de mettre à jour le feu (effet un feu qui brûle)
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -31,7 +31,7 @@ public class Fire extends Enemy {
     }
 
     /**
-     * Methode qui permet d'afficher l'icone du feu
+     * Méthode qui permet d'afficher l'icone du feu
      */
     @Override
     protected void dessiner() {
