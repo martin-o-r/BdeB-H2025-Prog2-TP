@@ -22,7 +22,14 @@ public class ExitDoor extends ObjetJeu {
     }
 
     /**
-     * Method qui permet de deverouiller la porte de sortie lorsque la cle est capturee
+     * Méthode vide, car la porte de sortie n'a pas besoin d'actualisation
+     * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
+     */
+    @Override
+    protected void mettreAJour(long deltaTemps) {}
+
+    /**
+     * Méthode qui permet de déverouiller la porte de sortie lorsque la clé est capturée
      */
     public static void unlockDoor() {
         doorLocked = false;
@@ -30,29 +37,22 @@ public class ExitDoor extends ObjetJeu {
     }
 
     /**
-     * Methode qui permet de verouiller la porte
+     * Méthode qui permet de vérouiller la porte
      */
     public static void lockDoor() {
         doorLocked = true;
     }
 
     /**
-     * Method qui permet de determiner si la porte de sortie est verouillee ou non
-     * @return Boolean qui identifie l'etat de la porte - verouillee ou deverouillee
+     * Méthode qui permet de determiner si la porte de sortie est verouillée ou non
+     * @return Boolean qui identifie l'etat de la porte - vérouillée ou déverouillée
      */
     public static boolean isDoorLocked() {
         return doorLocked;
     }
 
     /**
-     * Method qui permet de mettre a jour, mais l'objet porte de sortie ne change pas au courant du jeu
-     * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
-     */
-    @Override
-    protected void mettreAJour(long deltaTemps) {}
-
-    /**
-     * Method qui permet l'affichage de la porte de sortie selon l'etat verouillee ou non
+     * Méthode qui permet l'affichage de la porte de sortie selon l'état vérouillée ou non
      */
     @Override
     protected void dessiner() {

@@ -16,14 +16,14 @@ public class EntryDoor extends ObjetJeu {
     }
 
     /**
-     * Method qui permet de mettre a jour, mais la porte d'entree n'a aucun mouvement
+     * Méthode vide, car la porte de sortie n'a pas besoin d'actualisation
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Method qui permet d'afficher l'icone de la porte
+     * Méthode qui permet d'afficher l'icone de la porte
      */
     @Override
     protected void dessiner() {
