@@ -67,7 +67,7 @@ public abstract class InfoScreen extends ObjetJeu {
      */
     @Override
     protected void dessiner() {
-        String instruction = "APPUYER ESPACE POUR CONTINUER";
+        String instruction = "APPUYER SUR ESPACE POUR CONTINUER";
 
         EKOConsole.afficher((EKOConsole.largeur() - instruction.length()) / 2, EKOConsole.hauteur() - 1, instruction,
                 EKOCouleur.GRIS_FONCE);
