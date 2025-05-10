@@ -1,7 +1,7 @@
 public abstract class Enemy extends ObjetJeu {
 
     /**
-     * Constructor des objets de Etiquette.ENEMY
+     * Constructeur des objets avec Etiquette.ENEMY
      * @param name Nom donne a l'ennemi
      * @param x Positon X de l'objet ennemi
      * @param y Position Y de l'objet ennemi
@@ -12,14 +12,14 @@ public abstract class Enemy extends ObjetJeu {
     }
 
     /**
-     * Method qui permet de mettre a jour chaque ennemi cree
+     * Méthode qui permet de mettre à jour chaque ennemi crée
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Method qui permet d'afficher les icones de chaque ennemi
+     * Méthode qui permet d'afficher les icones de chaque ennemi
      */
     @Override
     protected void dessiner() {}
