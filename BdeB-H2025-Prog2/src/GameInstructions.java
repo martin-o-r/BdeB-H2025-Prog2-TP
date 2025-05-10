@@ -15,12 +15,12 @@ public class GameInstructions extends InfoScreen {
      */
     @Override
     protected void dessiner() {
-        String commandes = "- Utilisez les flèches pour vous deplacer -";
+        String commandes = "- Utilisez les flèches pour vous déplacer -";
         String cle = "- Récupérez les cerises pour déverouiller les portes -";
-        String potion = "- Les beignes remplissent les pillulles -";
-        String ennemi = "- Évitez de trop coller les ennemis -";
+        String potion = "- Récupérez les beignes pour gagner des vies -";
+        String ennemi = "- Évitez les ennemis -";
         String debut = "Que le plaisir commence! :')";
-        String instruction = "APPUYER ESPACE POUR COMMENCER";
+        String instruction = "APPUYER SUR ESPACE POUR COMMENCER";
 
         int hauteurMilieu = EKOConsole.hauteur() /2;
 
