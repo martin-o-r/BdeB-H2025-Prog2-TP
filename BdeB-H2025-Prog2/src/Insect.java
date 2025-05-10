@@ -67,19 +67,23 @@ public class Insect extends Enemy{
 
         if (lefthandRule) {
 
-            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+            if (!HitSomething.didWeHitAWall(nextX, nextY) &&
+                !HitSomething.didWeHitADoor(nextX, nextY)) {
+
                 position.x = nextX;
                 position.y = nextY;
 
-                //verifier s'il y un mur a gauche pour continuer a longer les mur - "left-hand rule"
+                //vérifier s'il y un mur a gauche pour continuer à longer les mur - "left-hand rule"
                 goLeftHandRule();
             } else {
-                changeDirectionLHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
+                changeDirectionLHR(); //s'il y a un mur à gauche et devant, alors on doit tourner a gauche
             }
 
         } else {
 
-            if (isNextMoveValid(nextX, nextY)) { //verification pour ne pas sortir du perimetre du jeu/tableau
+            if (!HitSomething.didWeHitAWall(nextX, nextY) &&
+                !HitSomething.didWeHitADoor(nextX, nextY)) {
+
                 position.x = nextX;
                 position.y = nextY;
 
@@ -110,7 +114,10 @@ public class Insect extends Enemy{
         }
     }
 
-    private void reverseDirection() { //tourner 180 degres
+    /**
+     * Méthode qui permet a l'insecte de se tourner 180 degrés
+     */
+    private void reverseDirection() {
         switch (direction) {
             case UP -> direction = InsectDirections.DOWN;
             case DOWN -> direction = InsectDirections.UP;
@@ -120,7 +127,7 @@ public class Insect extends Enemy{
     }
 
     /**
-     * Methode qui permet de determiner si l'insecte collision avec la peripherie de la porte de sortie
+     * Méthode qui permet de déterminer si l'insecte entre en collision avec la péripherie de la porte de sortie
      * @param x Position X de l'insecte
      * @param y Position Y de l'insecte
      * @return boolean qui determine si l'insecte collision avec la periripherie de la porte de sortie
