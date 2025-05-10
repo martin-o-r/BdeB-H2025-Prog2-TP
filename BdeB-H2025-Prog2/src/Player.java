@@ -2,13 +2,13 @@ import eko.*;
 
 public class Player extends ObjetJeu implements Collisionnable{
 
-    //Attributs pour les sons lors des interactions avec d'autres objets
-    private static EKOSon KEY_CAPTURED = EKOAudio.charger("audio/404359__kagateni__success2_cut.wav");
-    private static EKOSon ENEMY_TOUCHED = EKOAudio.charger("audio/651625__martcraft__fail_cut.wav");
-    private static EKOSon POTION_DRINKED = EKOAudio.charger("audio/41529__jamius__potiondrinklong.wav");
+    //Attributs pour les sons lors des intéractions avec d'autres objets
+    private static final EKOSon KEY_CAPTURED = EKOAudio.charger("audio/404359__kagateni__success2_cut.wav");
+    private static final EKOSon ENEMY_TOUCHED = EKOAudio.charger("audio/651625__martcraft__fail_cut.wav");
+    private static final EKOSon POTION_DRINKED = EKOAudio.charger("audio/41529__jamius__potiondrinklong.wav");
 
     //Attributs propre a l'objet
-    private static final String icon = "\uEF0C";
+    private static final String ICON = "\uEF0C";
 
     /**
      * Constructeur de l'objet de type Player
@@ -20,7 +20,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     }
 
     /**
-     * Method qui permet de controler le deplacement du joeur a l'interieur du jeu
+     * Méthode qui permet de contrôler le déplacement du joeur à l'intérieur du jeu
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
@@ -39,45 +39,27 @@ public class Player extends ObjetJeu implements Collisionnable{
             nextMoveY++;
         }
 
-        boolean hitSomething = false;
-
-        ObjetJeu entryDoorTemp = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Entry door");
-        int entryDoorX = entryDoorTemp.getX();
-        int entryDoorY = entryDoorTemp.getY();
-
-        ObjetJeu exitDoorTemp = GestionnaireObjetsJeu.obtenir().trouverObjetJeu("Exit door");
-        int exitDoorX = exitDoorTemp.getX();
-        int exitDoorY = exitDoorTemp.getY();
-
-
-        hitSomething = HitSomething.didWeHitAWall(nextMoveX, nextMoveY);
-
-        if ((entryDoorX == nextMoveX && entryDoorY == nextMoveY) || //joueur ne peut pas traverser la porte d'entree
-                (ExitDoor.isDoorLocked() && (exitDoorX == nextMoveX && exitDoorY == nextMoveY))) {
-                //joueur ne pas traverser la porte de sortie si elle n'est pas deverouillee
-            hitSomething = true;
-        }
-
-        if (!hitSomething) {
+        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
+            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
-            Skeleton.getPlayerPosition(position.x, position.y);
-            //permettre au Skeleton de connaitre la position du joueur
-        }
 
+            //permettre au Skeleton de connaitre la position du joueur
+            Skeleton.getPlayerPosition(position.x, position.y);
+        }
     }
 
     /**
-     * Method qui permet d'afficher l'icon du joueur
+     * Méthode qui permet d'afficher l'icon du joueur
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.RVB(255,228,133));
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(255,158,158));
         //couleur mocassin : FFE485 ou (255,228,133)
     }
 
     /**
-     * Method qui permet de gerer les collisions
+     * Méthod qui permet de gérer les collisions
      * @param autre Autre objet de jeu impliqué dans la collision
      */
     @Override
