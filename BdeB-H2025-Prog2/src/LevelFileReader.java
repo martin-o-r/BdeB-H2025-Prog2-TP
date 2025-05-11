@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Plus d'information sur la méthode File.readAllLines()
- *  https://medium.com/@AlexanderObregon/javas-files-readalllines-method-explained-14312314c1c4
+/*
+Plus d'information sur la méthode File.readAllLines()
+    https://medium.com/@AlexanderObregon/javas-files-readalllines-method-explained-14312314c1c4
  */
 
 public class LevelFileReader extends ObjetJeu{
@@ -64,66 +64,30 @@ public class LevelFileReader extends ObjetJeu{
         //type static qui suit le joueur au courant de la progression
         everyGameObjects.add(new LifeIndicator(0,0));
 
-        int y = 0;
+        int y = 0; //coordonées y des objets qui seront créés
         for (String s : lines) {
             y++;
-            for (int i = 0; i < s.length(); i++) {
+            for (int i = 0; i < s.length(); i++) { //index i utilisé pour la coordonée x des objets
 
-                switch (s.charAt(i)) {
-                    case '#' :
-                        Wall wall = new Wall(i, y);
-                        everyGameObjects.add(wall);
-                        break;
-                    case 'P' :
-                        Player player = new Player(i, y);
-                        everyGameObjects.add(player);
-                        break;
-                    case '+' :
-                        EntryDoor entryDoor = new EntryDoor(i, y);
-                        everyGameObjects.add(entryDoor);
-                        break;
-                    case '-' :
-                        ExitDoor exitDoor = new ExitDoor(i, y);
-                        everyGameObjects.add(exitDoor);
-                        break;
-                    case 'K' :
-                        Key key = new Key(i, y);
-                        everyGameObjects.add(key);
-                        break;
-                    case 'F' :
-                        Fire fire = new Fire(i, y);
-                        everyGameObjects.add(fire);
-                        break;
-                    case 'L' :
-                        Potion potion = new Potion(i, y);
-                        everyGameObjects.add(potion);
-                        break;
-                    case 'G' :
-                        GhostVertical ghostVertical = new GhostVertical(i, y);
-                        everyGameObjects.add(ghostVertical);
-                        break;
-                    case 'H' :
-                        GhostHorizontal ghostHorizontal = new GhostHorizontal(i, y);
-                        everyGameObjects.add(ghostHorizontal);
-                        break;
-                    case 'S' :
-                        Skeleton skeleton = new Skeleton(i, y);
-                        everyGameObjects.add(skeleton);
-                        break;
-                    case 'I' :
-                        Insect insect = new Insect(i, y);
-                        everyGameObjects.add(insect);
-                        break;
-                    case 'C' :
-                        FrogLookingRight frogLookingRight = new FrogLookingRight(i, y);
-                        everyGameObjects.add(frogLookingRight);
-                        break;
-                    case 'V' :
-                        FrogLookingLeft frogLookingLeft = new FrogLookingLeft(i, y);
-                        everyGameObjects.add(frogLookingLeft);
-                        break;
-                    default :
-                        break;
+                ObjetJeu gameObject = switch (s.charAt(i)) {
+                    case '#' -> new Wall(i, y);
+                    case 'P' -> new Player(i, y);
+                    case '+' -> new EntryDoor(i, y);
+                    case '-' -> new ExitDoor(i, y);
+                    case 'K' -> new Key(i, y);
+                    case 'F' -> new Fire(i, y);
+                    case 'L' -> new Potion(i, y);
+                    case 'G' -> new GhostVertical(i, y);
+                    case 'H' -> new GhostHorizontal(i, y);
+                    case 'S' -> new Skeleton(i, y);
+                    case 'I' -> new Insect(i, y);
+                    case 'C' -> new FrogLookingRight(i, y);
+                    case 'V' -> new FrogLookingLeft(i, y);
+                    default -> null;
+                };
+
+                if (gameObject != null) {
+                    everyGameObjects.add(gameObject);
                 }
             }
         }

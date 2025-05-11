@@ -1,17 +1,17 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-/**
- * La logique pour suivre le Player est expliqué dans un des commentaires de cet affichage reddit :
- *     https://www.reddit.com/r/javahelp/comments/bqlko1/how_to_make_object_follow_another_object/
- *
- * Le concept de "return" dans une methode void (en voulant utiliser un path finder A*)
- *     https://stackoverflow.com/questions/744676/what-does-the-return-keyword-do-in-a-void-method-in-java
+/*
+La logique pour suivre le Player est expliqué dans un des commentaires de cet affichage reddit :
+    https://www.reddit.com/r/javahelp/comments/bqlko1/how_to_make_object_follow_another_object/
+
+Le concept de "return" dans une methode void (en voulant utiliser un path finder A*)
+    https://stackoverflow.com/questions/744676/what-does-the-return-keyword-do-in-a-void-method-in-java
  */
 
 public class Skeleton extends Enemy {
 
-    private static String icon = "\uEE15";
+    private final String ICON = "\uEE15";
     private long waitBeforeMoving = 0;
     private final long MAX_WAIT = 350;
     private static int playerX;
@@ -64,8 +64,8 @@ public class Skeleton extends Enemy {
             nextMoveY++;
         }
 
-        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
-            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
+        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY)
+                && !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         }
@@ -76,7 +76,7 @@ public class Skeleton extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.RVB(243, 233, 208));
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(243, 233, 208));
     }
 
 }

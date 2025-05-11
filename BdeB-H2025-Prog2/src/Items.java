@@ -20,7 +20,7 @@ public abstract class Items extends ObjetJeu {
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Méthode que chaque sous-classe devra implementer pour leur affichage respectif
+     * Méthode que chaque sous-classe devra implémenter pour leur affichage respectif
      */
     @Override
     protected void dessiner() {}

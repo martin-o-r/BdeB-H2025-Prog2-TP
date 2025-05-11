@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class EntryDoor extends ObjetJeu {
 
     //Attributs
-    private static String icon = "\uEAD3";
+    private final String ICON = "\uEAD3";
 
     /**
      * Constructeur qui permet d'instancier la porte d'entrée
@@ -27,7 +27,7 @@ public class EntryDoor extends ObjetJeu {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(getX(), getY(), icon, EKOCouleur.VERT);
+        EKOConsole.afficher(getX(), getY(), ICON, EKOCouleur.VERT);
     }
 
 

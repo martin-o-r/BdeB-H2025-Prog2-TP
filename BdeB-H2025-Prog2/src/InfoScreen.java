@@ -2,17 +2,17 @@ import eko.EKOConsole;
 import eko.EKOCouleur;
 import eko.EKOTouche;
 
-/**
- * Informations supplémentaires sur KeyListener
- *     https://stackoverflow.com/questions/10876491/how-to-use-keylistener
- *         -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyée" et "est relachée"
- *             -> enseignant recommande d'utiliser boolean pour faire la detection quand la touche est relachée
- *     https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
- *
- * Utilisation de System.exit(0) pour fermer la fenêtre de la console une fois le jeu terminé
- *     https://stackoverflow.com/questions/30898773/how-do-i-use-system-exit-in-java
- *     https://stackoverflow.com/questions/12117160/terminate-a-console-application-in-java
- *     https://stackoverflow.com/questions/2434592/difference-in-system-exit0-system-exit-1-system-exit1-in-java
+/*
+Informations supplémentaires sur KeyListener
+    https://stackoverflow.com/questions/10876491/how-to-use-keylistener
+        -> il faut suivre l'etat de la touche ESPACE e.i. sur 2 frames differents, "a ete appuyée" et "est relachée"
+            -> enseignant recommande d'utiliser boolean pour faire la detection quand la touche est relachée
+    https://stackoverflow.com/questions/21969954/how-to-detect-a-key-press-in-java
+
+Utilisation de System.exit(0) pour fermer la fenêtre de la console une fois le jeu terminé
+    https://stackoverflow.com/questions/30898773/how-do-i-use-system-exit-in-java
+    https://stackoverflow.com/questions/12117160/terminate-a-console-application-in-java
+    https://stackoverflow.com/questions/2434592/difference-in-system-exit0-system-exit-1-system-exit1-in-java
  */
 
 public abstract class InfoScreen extends ObjetJeu {

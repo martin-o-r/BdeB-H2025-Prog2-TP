@@ -1,15 +1,15 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-/**
- * Aide pour développer la logique pour le déplacement sur l'axe X et Y, qui est défini dans chaque sous-class de Ghost
- *  https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
+/*
+Aide pour développer la logique pour le déplacement sur l'axe X et Y, qui est défini dans chaque sous-class de Ghost
+    https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
  */
 
 public abstract class Ghost extends Enemy {
 
     //Attributs
-    private static final String icon = "\uEEFE";
+    private static final String ICON = "\uEEFE";
     private long waitBeforeMoving = 0;
     private final long MAX_WAITING = 50;
     private int moveIncrementation = 1;
@@ -24,10 +24,9 @@ public abstract class Ghost extends Enemy {
      * @param name Nom donne a l'objet de type Ghost
      * @param x Position x de l'objet de type Ghost
      * @param y Position y de l'objet de type Ghost
-     * @param enemyType Etiquette pour le type Ghost
      */
-    public Ghost(String name, int x, int y, Etiquette enemyType) {
-        super(name, x, y, enemyType);
+    public Ghost(String name, int x, int y) {
+        super(name, x, y, Etiquette.ENEMY);
     }
 
     /**
@@ -52,8 +51,8 @@ public abstract class Ghost extends Enemy {
             nextMoveY += moveIncrementation;
         }
 
-        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY) &&
-            !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
+        if (!HitSomething.didWeHitAWall(nextMoveX, nextMoveY)
+                && !HitSomething.didWeHitADoor(nextMoveX, nextMoveY)) {
             position.x = nextMoveX;
             position.y = nextMoveY;
         } else {
@@ -72,6 +71,6 @@ public abstract class Ghost extends Enemy {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.BLANC);
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.BLANC);
     }
 }

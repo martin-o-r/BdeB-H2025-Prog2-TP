@@ -1,5 +1,3 @@
-import eko.EKOConsole;
-
 public class FrogLookingLeft extends Frog {
 
     /**
@@ -8,7 +6,7 @@ public class FrogLookingLeft extends Frog {
      * @param y Position Y de la grenouille qui regarde vers la gauche
      */
     public FrogLookingLeft(int x, int y) {
-        super(x, y);
+        super("Frog looking left",x, y);
 
         //On retourne les characteres pour qu'ils regardent vers la gauche
         ICON.retourner();

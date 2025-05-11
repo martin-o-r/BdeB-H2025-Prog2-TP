@@ -1,5 +1,3 @@
-import eko.EKOConsole;
-
 public class FrogLookingRight extends Frog{
 
     /**
@@ -8,7 +6,7 @@ public class FrogLookingRight extends Frog{
      * @param y Position Y de la grenouille qui regarde vers la gauche
      */
     public FrogLookingRight(int x, int y) {
-        super(x, y);
+        super("Frog looking right",x, y);
     }
 
     /**

@@ -2,7 +2,7 @@ public abstract class Enemy extends ObjetJeu {
 
     /**
      * Constructeur des objets avec Etiquette.ENEMY
-     * @param name Nom donne a l'ennemi
+     * @param name Nom donné à l'ennemi
      * @param x Positon X de l'objet ennemi
      * @param y Position Y de l'objet ennemi
      * @param enemyType Etiquette de l'enemi

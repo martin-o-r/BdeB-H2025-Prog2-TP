@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class Key extends Items {
 
     //Attributs
-    private static String icon = "\uE29B";
+    private final String ICON = "\uE29B";
 
     /**
      * Constructeur d'un objet de type Key
@@ -20,7 +20,7 @@ public class Key extends Items {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.ROUGE);
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.ROUGE);
     }
 
 }

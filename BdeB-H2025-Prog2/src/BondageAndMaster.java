@@ -8,6 +8,7 @@ import eko.*;
  *
  * @author Martin Ore Rodriguez - 1425594
  * @date Remise le 11 mai 2025
+ * @version Version finale de remise
  */
 
 public class BondageAndMaster {

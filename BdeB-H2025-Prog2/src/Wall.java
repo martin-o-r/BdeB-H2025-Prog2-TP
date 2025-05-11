@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class Wall extends ObjetJeu{
 
     //Attributs
-    private static String icon = "\u2588";
+    private final String ICON = "\u2588";
 
     /**
      * Constructeur qui permet d'instancier un objet de type Wall
@@ -27,7 +27,7 @@ public class Wall extends ObjetJeu{
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.NOIR);
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.NOIR);
     }
 
 }

@@ -89,27 +89,25 @@ public class Player extends ObjetJeu implements Collisionnable{
     public void gererCollisionAvec(ObjetJeu autre) {
 
         switch (autre.etiquette) {
-            case Etiquette.KEY :
+            case Etiquette.KEY -> {
                 autre.desactiver();
                 ExitDoor.unlockDoor();
                 EKOAudio.jouer(KEY_CAPTURED);
-                break;
-            case Etiquette.ENEMY :
+            }
+            case Etiquette.ENEMY -> {
                 LifeIndicator.looseALife();
                 EKOAudio.jouer(ENEMY_TOUCHED);
                 GameProgressManager.restartLevel();
-                break;
-            case Etiquette.POTION :
+            }
+            case Etiquette.POTION -> {
                 autre.desactiver();
                 EKOAudio.jouer(POTION_DRINKED);
                 LifeIndicator.refuelLife();
-                break;
-            case Etiquette.EXIT_DOOR :
+            }
+            case Etiquette.EXIT_DOOR -> {
                 EKOAudio.jouer(EXIT_DOOR);
                 GameProgressManager.next(GameProgressManager.getCurrentScreen().etiquette);
-                break;
-            default :
-                break;
+            }
         }
     }
 }

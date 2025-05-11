@@ -1,36 +1,41 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-/**
- * Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
- *     https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
- *     https://www.instructables.com/Robot-Maze-Solver/
- *         -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
- *             --> toujours tourner à gauche si on peut (valider prochain mouvement!!)
- *             --> si on ne peut pas tourner à gauche... :
- *                 --> aller tout droit
- *                 --> ou aller tout droit, alors tourner à droite
- *                 --> aller tout droit et tourner à gauche, alors faire demi-tour (methode reverse?)
- *     https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
- *     https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
- *         -> Enum pour déterminer un sens de déplacement e.g. RIGHT implique position.x++
- *     https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
- *     https://en.wikipedia.org/wiki/Maze-solving_algorithm
- *
- * Enseignant :
- *     -> commencer par la règle de la main gauche, se déplacer dans un sens e.g. RIGHT (sens de déplacement initial)
- *     -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite (changer de
- *             direction)
- *
- * Logique pour l'effet "toggle" avec un boolean
- *     https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
- *          ->  un boolean va prendre la valeur inverse du lui-meme
+/*
+Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
+    https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
+    https://www.instructables.com/Robot-Maze-Solver/
+        -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
+            --> toujours tourner à gauche si on peut (valider prochain mouvement!!)
+            --> si on ne peut pas tourner à gauche... :
+                --> aller tout droit
+                --> ou aller tout droit, alors tourner à droite
+                --> aller tout droit et tourner à gauche, alors faire demi-tour (methode reverse?)
+    https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
+    https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
+        -> Enum pour déterminer un sens de déplacement e.g. RIGHT implique position.x++
+    https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
+    https://en.wikipedia.org/wiki/Maze-solving_algorithm
+
+Enseignant :
+    -> commencer par la règle de la main gauche, se déplacer dans un sens e.g. RIGHT (sens de déplacement initial)
+    -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite (changer de
+             direction)
+
+Switch avec des lambda
+    https://stackoverflow.com/questions/72116516/is-there-a-way-to-do-switch-expression-fallthrough-with-lambda-like-syntax-for-d
+    https://blogs.oracle.com/javamagazine/post/new-switch-expressions-in-java-12
+    https://www.javacodegeeks.com/2020/05/switch-as-an-expression-in-java-with-lambda-like-syntax.html
+
+Logique pour l'effet "toggle" avec un boolean pour déterminer quelle main utiliser pour guider l'insecte
+    https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+         ->  un boolean va prendre la valeur inverse du lui-meme
  */
 
 public class Insect extends Enemy{
 
     //Attributs
-    private final String icon = "\uF188";
+    private final String ICON = "\uF188";
     private long waitBeforeMoving = 0;
     private final long MAX_WAIT = 50;
     private InsectDirections direction = InsectDirections.RIGHT; //determine le sens de deplacement
@@ -75,8 +80,8 @@ public class Insect extends Enemy{
 
         if (lefthandRule) {
 
-            if (!HitSomething.didWeHitAWall(nextX, nextY) &&
-                !HitSomething.didWeHitADoor(nextX, nextY)) {
+            if (!HitSomething.didWeHitAWall(nextX, nextY)
+                    && !HitSomething.didWeHitADoor(nextX, nextY)) {
 
                 position.x = nextX;
                 position.y = nextY;
@@ -89,8 +94,8 @@ public class Insect extends Enemy{
 
         } else {
 
-            if (!HitSomething.didWeHitAWall(nextX, nextY) &&
-                !HitSomething.didWeHitADoor(nextX, nextY)) {
+            if (!HitSomething.didWeHitAWall(nextX, nextY)
+                    && !HitSomething.didWeHitADoor(nextX, nextY)) {
 
                 position.x = nextX;
                 position.y = nextY;
@@ -140,10 +145,10 @@ public class Insect extends Enemy{
         int exitDoorY = exitDoor.getY();
 
         //détermine si on collisionne avec la "périphérie" de la porte
-        if ((x == exitDoorX && y == exitDoorY -1) || //on verifie le haut de la porte
-                (x == exitDoorX && y == exitDoorY + 1) || //on verifie le bas
-                (x == exitDoorX + 1 && y == exitDoorY) || //on verigie a droite
-                (x == exitDoorX -1 && y == exitDoorY)) { // on verifie a gauche
+        if ((x == exitDoorX && y == exitDoorY -1) //on verifie le haut de la porte
+                || (x == exitDoorX && y == exitDoorY + 1) //on verifie le bas
+                || (x == exitDoorX + 1 && y == exitDoorY) //on verifie a droite
+                || (x == exitDoorX -1 && y == exitDoorY)) { // on verifie a gauche
             return true;
         }
         return false;
@@ -167,8 +172,8 @@ public class Insect extends Enemy{
         }
 
         //Si un mur est à gauche, on continue à avancer
-        if (HitSomething.didWeHitAWall(xLeft, yLeft) ||
-            HitSomething.didWeHitADoor(xLeft, yLeft)) {
+        if (HitSomething.didWeHitAWall(xLeft, yLeft)
+                || HitSomething.didWeHitADoor(xLeft, yLeft)) {
             return;
         }
 
@@ -200,8 +205,8 @@ public class Insect extends Enemy{
         }
 
         //si un mur est à droite, on continue à avancer
-        if (HitSomething.didWeHitAWall(xRight, yRight) ||
-            HitSomething.didWeHitADoor(xRight, yRight)) {
+        if (HitSomething.didWeHitAWall(xRight, yRight)
+                || HitSomething.didWeHitADoor(xRight, yRight)) {
             return;
         }
 
@@ -222,17 +227,12 @@ public class Insect extends Enemy{
      * @return la direction a gauche a prendre
      */
     private InsectDirections getLeftDirection() {
-        switch (direction) {
-            case UP :
-                return InsectDirections.LEFT;
-            case LEFT :
-                return InsectDirections.DOWN;
-            case DOWN :
-                return InsectDirections.RIGHT;
-            case RIGHT :
-                return InsectDirections.UP;
-        }
-        return null;
+        return switch (direction) {
+            case UP -> InsectDirections.LEFT;
+            case LEFT -> InsectDirections.DOWN;
+            case DOWN -> InsectDirections.RIGHT;
+            case RIGHT -> InsectDirections.UP;
+        };
     }
 
     /**
@@ -240,17 +240,12 @@ public class Insect extends Enemy{
      * @return la direction a droite a prendre
      */
     private InsectDirections getRightDirection() {
-        switch (direction) {
-            case UP :
-                return InsectDirections.RIGHT;
-            case RIGHT :
-                return InsectDirections.DOWN;
-            case DOWN :
-                return InsectDirections.LEFT;
-            case LEFT :
-                return InsectDirections.UP;
-        }
-        return null;
+        return switch (direction) {
+            case UP -> InsectDirections.RIGHT;
+            case RIGHT -> InsectDirections.DOWN;
+            case DOWN -> InsectDirections.LEFT;
+            case LEFT -> InsectDirections.UP;
+        };
     }
 
     /**
@@ -258,6 +253,6 @@ public class Insect extends Enemy{
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(position.x, position.y, icon, EKOCouleur.RVB(204,153, 255));
+        EKOConsole.afficher(position.x, position.y, ICON, EKOCouleur.RVB(204,153, 255));
     }
 }

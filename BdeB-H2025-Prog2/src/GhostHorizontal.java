@@ -6,7 +6,7 @@ public class GhostHorizontal extends Ghost{
      * @param y Position Y de l'objet
      */
     public GhostHorizontal(int x, int y) {
-        super("GhostHorizontal", x, y, Etiquette.ENEMY);
+        super("GhostHorizontal", x, y);
     }
 
     /**

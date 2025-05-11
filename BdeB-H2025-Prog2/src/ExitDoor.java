@@ -6,10 +6,10 @@ import eko.EKOSon;
 public class ExitDoor extends ObjetJeu {
 
     //Attributs de la porte de sortie
-    private static final String lockedDoor = "\uE0A2";
-    private static final String unlockedDoor = "\uE258";
+    private final String LOCKED_DOOR_ICON = "\uE0A2";
+    private final String UNLOCKED_DOOR_ICON = "\uE258";
     private static boolean doorLocked = true;
-    private static final EKOSon unlockingDoor = EKOAudio.charger("audio/553518__newlocknew__pop-down" +
+    private static final EKOSon UNLOCKING_DOOR = EKOAudio.charger("audio/553518__newlocknew__pop-down" +
             "-impact_49lrsmltprcssng_cut.wav");
 
     /**
@@ -33,7 +33,7 @@ public class ExitDoor extends ObjetJeu {
      */
     public static void unlockDoor() {
         doorLocked = false;
-        EKOAudio.jouer(unlockingDoor);
+        EKOAudio.jouer(UNLOCKING_DOOR);
     }
 
     /**
@@ -57,9 +57,9 @@ public class ExitDoor extends ObjetJeu {
     @Override
     protected void dessiner() {
         if (doorLocked) {
-            EKOConsole.afficher(getX(), getY(), lockedDoor, EKOCouleur.RVB(255, 192, 0));
+            EKOConsole.afficher(getX(), getY(), LOCKED_DOOR_ICON, EKOCouleur.RVB(255, 192, 0));
         } else {
-            EKOConsole.afficher(getX(), getY(), unlockedDoor, EKOCouleur.RVB(255, 20, 147));
+            EKOConsole.afficher(getX(), getY(), UNLOCKED_DOOR_ICON, EKOCouleur.RVB(255, 20, 147));
         }
     }
 

@@ -3,27 +3,27 @@ import eko.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Logique pour creer une animation en java
- *     https://www.svetprogramiranja.com/animations_in_java_example.html
- *         -> besoin d'un "Timer" pour controler le déplacement de la langue?
- *             -> peut-etre utiliser un autre attribut pour controler la langue?
- *         -> en plus de celui deja utilisé pour ralentir les mouvements?
- *     https://codingtechroom.com/tutorial/java-implementing-game-timers-java-2d-game-development?utm_source=chatgpt.com
- *         ->Timer est une classe en soi! Non non, pas aller la...
- *         -> principe d'un chronomètre qui marque le début d'une action puis un autre chronomètre qui marque la fin
- *         -> durant ce lapse, on implémente ce qui est désiré
- *     https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
- *         -> on peut définir un temps d'attente, durant lequel on peut effectuer du code
- */
+/*
+Logique pour creer une animation en java
+    https://www.svetprogramiranja.com/animations_in_java_example.html
+        -> besoin d'un "Timer" pour controler le déplacement de la langue?
+            -> peut-etre utiliser un autre attribut pour controler la langue?
+        -> en plus de celui deja utilisé pour ralentir les mouvements?
+    https://codingtechroom.com/tutorial/java-implementing-game-timers-java-2d-game-development?utm_source=chatgpt.com
+        ->Timer est une classe en soi! Non non, pas aller la...
+        -> principe d'un chronomètre qui marque le début d'une action puis un autre chronomètre qui marque la fin
+        -> durant ce lapse, on implémente ce qui est désiré
+    https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
+        -> on peut définir un temps d'attente, durant lequel on peut effectuer du code
+*/
 
 public abstract class Frog extends Enemy {
 
     //Attributs
-    EKOCouleur color = EKOCouleur.RVB(34, 139, 34);
-    protected final EKOChaine ICON = new EKOChaine("\uEDF8", color) ;
-    protected final EKOChaine TONGUE1 = new EKOChaine("\u2500", color); //corps de la langue
-    protected final EKOChaine TONGUE2 = new EKOChaine("\u257C", color); //pointe de la langue
+    protected final EKOCouleur COLOR = EKOCouleur.RVB(34, 139, 34);
+    protected final EKOChaine ICON = new EKOChaine("\uEDF8", COLOR) ;
+    protected final EKOChaine TONGUE1 = new EKOChaine("\u2500", COLOR); //corps de la langue
+    protected final EKOChaine TONGUE2 = new EKOChaine("\u257C", COLOR); //pointe de la langue
 
     private long waitBeforeMoving = 0;
     private final long MAX_WAIT = 30;
@@ -32,6 +32,8 @@ public abstract class Frog extends Enemy {
     protected int tongueLength = 0;
     protected final int MAX_TONGUE_LENGTH = 3;
     private long tongueTimer = 0;
+    private final long TONGUE_EXTENSION = 800;
+    private final long TONGUE_CONTRACTION = 1300;
 
     private List<Position> tonguePositions = new ArrayList<>(); //utilisation de la classe Position
 
@@ -42,8 +44,8 @@ public abstract class Frog extends Enemy {
      * @param x Position X initiale du frog
      * @param y Position Y initiale du frog
      */
-    public Frog(int x, int y) {
-        super("Frog", x, y, Etiquette.ENEMY);
+    public Frog(String name,int x, int y) {
+        super(name, x, y, Etiquette.ENEMY);
     }
 
     /**
@@ -61,14 +63,14 @@ public abstract class Frog extends Enemy {
 
         tongueTimer += deltaTemps;
 
-        if (tongueTimer < 800) { //extension de la langue
+        if (tongueTimer < TONGUE_EXTENSION) { //extension de la langue
             extendedTongue = true;
 
             if (tongueLength < MAX_TONGUE_LENGTH) {
                 tongueLength++;
             }
 
-        } else if (tongueTimer < 1300) { //rétraction de la langue
+        } else if (tongueTimer < TONGUE_CONTRACTION) { //rétraction de la langue
 
             if (tongueTimer > 0) {
                 tongueLength--;

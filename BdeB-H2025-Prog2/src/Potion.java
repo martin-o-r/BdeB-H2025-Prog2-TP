@@ -4,7 +4,7 @@ import eko.EKOCouleur;
 public class Potion extends Items {
 
     //Attributs
-    private static String icon = "\uE273";
+    private final String ICON = "\uE273";
 
     /**
      * Constructeur de l'objet de type Potion
@@ -20,7 +20,7 @@ public class Potion extends Items {
      */
     @Override
     protected void dessiner() {
-        EKOConsole.afficher(getX(), getY(), icon, EKOCouleur.MAGENTA);
+        EKOConsole.afficher(getX(), getY(), ICON, EKOCouleur.MAGENTA);
     }
 
 }

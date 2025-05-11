@@ -4,8 +4,8 @@ import eko.EKOCouleur;
 public class LifeIndicator extends ObjetJeu {
 
     //Attributs
-    private static final String iconFull = "\uE221";
-    private static final String iconLose = "\uE231";
+    private static final String ICON_FULL = "\uE221";
+    private static final String ICON_LOSE = "\uE231";
     private static final int MAX_HEALTH = 5;
     private static int nbLifeLeft = 5;
 
@@ -45,7 +45,7 @@ public class LifeIndicator extends ObjetJeu {
     @Override
     protected void dessiner() {
         //implementer du code pour determiner quand perdre une vie et comment le representer
-        String life = iconFull.repeat(nbLifeLeft) + iconLose.repeat(MAX_HEALTH - nbLifeLeft);
+        String life = ICON_FULL.repeat(nbLifeLeft) + ICON_LOSE.repeat(MAX_HEALTH - nbLifeLeft);
         EKOConsole.afficher(position.x, position.y, life, EKOCouleur.ROSE);
     }
 
