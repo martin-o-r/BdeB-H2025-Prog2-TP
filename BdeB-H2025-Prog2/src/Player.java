@@ -11,6 +11,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     //Attributs propre a l'objet
     private static final String ICON = "\uEF0C";
     private long waitBeforeMoving = 0;
+    private final long MAX_WAIT = 25;
 
     /**
      * Constructeur de l'objet de type Player
@@ -28,7 +29,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     @Override
     protected void mettreAJour(long deltaTemps) {
         waitBeforeMoving += deltaTemps;
-        if (waitBeforeMoving < 25) {
+        if (waitBeforeMoving < MAX_WAIT) {
             return;
         }
         waitBeforeMoving = 0;
@@ -81,7 +82,7 @@ public class Player extends ObjetJeu implements Collisionnable{
     }
 
     /**
-     * Méthode qui permet de gérer les collisions
+     * Méthode qui permet de gérer les collisions avec d'autres ObjetJeu
      * @param autre Autre objet de jeu impliqué dans la collision
      */
     @Override

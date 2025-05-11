@@ -44,7 +44,7 @@ public class ExitDoor extends ObjetJeu {
     }
 
     /**
-     * Méthode qui permet de determiner si la porte de sortie est verouillée ou non
+     * Méthode qui permet de déterminer si la porte de sortie est verouillée ou non
      * @return Boolean qui identifie l'etat de la porte - vérouillée ou déverouillée
      */
     public static boolean isDoorLocked() {

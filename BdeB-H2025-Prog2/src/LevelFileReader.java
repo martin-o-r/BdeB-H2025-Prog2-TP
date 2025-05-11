@@ -8,11 +8,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Plus d'information sur la méthode File.readAllLines()
+ *  https://medium.com/@AlexanderObregon/javas-files-readalllines-method-explained-14312314c1c4
+ */
+
 public class LevelFileReader extends ObjetJeu{
-    /*
-    Plus d'information sur la méthode File.readAllLines()
-    https://medium.com/@AlexanderObregon/javas-files-readalllines-method-explained-14312314c1c4
-     */
 
     private String levelName;
     private Etiquette etiquette;

@@ -3,7 +3,7 @@ import eko.EKOConsole;
 public class FrogLookingLeft extends Frog {
 
     /**
-     * Constructeur pour la grenouille qui regarde vers la gauche
+     * Constructeur de la grenouille qui regarde vers la gauche
      * @param x Position X de la grenouille qui regarde vers la gauche
      * @param y Position Y de la grenouille qui regarde vers la gauche
      */
@@ -17,8 +17,8 @@ public class FrogLookingLeft extends Frog {
     }
 
     /**
-     * Methode qui permet de determiner l'orientation de la grenouille
-     * @return Boolean qui determine l'orientation
+     * Méthode qui permet de déterminer l'orientation de la grenouille
+     * @return Boolean qui détermine l'orientation
      */
     @Override
     protected boolean facingRight() {

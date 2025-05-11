@@ -1,16 +1,22 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
+/**
+ * Aide pour développer la logique pour le déplacement sur l'axe X et Y, qui est défini dans chaque sous-class de Ghost
+ *  https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
+ */
+
 public abstract class Ghost extends Enemy {
 
     //Attributs
     private static final String icon = "\uEEFE";
     private long waitBeforeMoving = 0;
+    private final long MAX_WAITING = 50;
     private int moveIncrementation = 1;
     /*
-    moveIncrementation permet de controler l'incrementation du déplacement du fantome (+1 == go down, -1 == go up).
+    moveIncrementation permet de contrôler l'incrémentation du déplacement du fantome (+1 == go down, -1 == go up).
     J'ai essayé de déclarer et d'initialiser à l'interieur de la méthode mettreAJour, mais il n'y avait aucun effet
-    sur le deplacement du fantome
+    sur le déplacement du fantôme
      */
 
     /**
@@ -24,11 +30,6 @@ public abstract class Ghost extends Enemy {
         super(name, x, y, enemyType);
     }
 
-    /*
-    Aide pour développer la logique pour le deplacement sur l'axe X et Y, defini par chaque sous-class de Ghost
-    https://stackoverflow.com/questions/50091790/how-do-i-make-an-object-move-horizontally
-     */
-
     /**
      * Méthode qui met à jour le déplacement de l'objet de type Ghost
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
@@ -37,7 +38,7 @@ public abstract class Ghost extends Enemy {
     protected void mettreAJour(long deltaTemps) {
         //Buffer qui permet de ralentir le mettreAJour
         waitBeforeMoving += deltaTemps;
-        if(waitBeforeMoving < 50) {
+        if(waitBeforeMoving < MAX_WAITING) {
             return;
         }
         waitBeforeMoving = 0;

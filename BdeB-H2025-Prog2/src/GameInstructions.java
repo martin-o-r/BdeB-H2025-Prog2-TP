@@ -11,7 +11,7 @@ public class GameInstructions extends InfoScreen {
     }
 
     /**
-     * Method qui permet d'afficher les instructions du jeu
+     * Méthode qui permet d'afficher les instructions du jeu
      */
     @Override
     protected void dessiner() {

@@ -27,7 +27,7 @@ public abstract class GameProgressManager{
     }
 
     /**
-     * Début du déroulement du jeu. Il commence avec l'affichage de l'auteur, du nom du jeu et des instructions
+     * Début du déroulement du jeu. Il commence avec l'affichage de l'auteur
      */
     public static void startGame() {
         currentScreen = new Author();
@@ -76,7 +76,7 @@ public abstract class GameProgressManager{
     }
 
     /**
-     * Méthode qui permet de détruire le currentScreen puis de creer le prochain écrans/niveaux
+     * Méthode qui permet de détruire le currentScreen puis de créer le prochain écrans/niveaux
      * @param newScreen
      */
     private static void updateScreen(ObjetJeu newScreen) {
@@ -91,15 +91,15 @@ public abstract class GameProgressManager{
 
     /**
      * Méthode qui permet de réinitialiser un niveau lorsqu'un jouer entre en contacte avec un ennemie.
-     * On efface l'efface l'ecran actuel puis on le 'recharche'
+     * On efface l'écran actuel puis on le 'recharge'
      */
     public static void restartLevel() {
         currentScreen.detruire(); //on efface le niveau qui est affiché
 
-        ExitDoor.lockDoor(); //on s'assure que la porte de sortie soit verouillée à niveau
+        ExitDoor.lockDoor(); //on s'assure que la porte de sortie soit verouillée à nouveau
 
-        if (currentScreen instanceof LevelFileReader) { //on teste si l'ecran actuel est un niveau pour rappeler les
-            // memes parametres
+        if (currentScreen instanceof LevelFileReader) { //on teste si l'écran actuel est un niveau pour rappeler les
+            // mêmes paramètres
             updateScreen(new LevelFileReader(((LevelFileReader) currentScreen).getLevelName(),
                     ((LevelFileReader) currentScreen).getLevelFilePath(),
                     ((LevelFileReader) currentScreen).getEtiquette(),

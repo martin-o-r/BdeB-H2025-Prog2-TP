@@ -13,7 +13,7 @@ public abstract class Items extends ObjetJeu {
 
     /**
      * Méthode heritée de ObjetJeu, mais ne sera implementée dans chaque sous-classe, car les items Key et Potion n'ont
-     * pas besoin de se deplacer
+     * pas besoin de se déplacer
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override

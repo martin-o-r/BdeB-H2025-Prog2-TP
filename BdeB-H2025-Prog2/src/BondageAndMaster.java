@@ -16,7 +16,7 @@ public class BondageAndMaster {
     private static final long MS_PAR_TRAME = 1000 / TPS; // temps par trame (en millisecondes)
 
     /**
-     * Main qui contient le deroulement du jeu complet
+     * Main qui contient le déroulement du jeu complet
      * @param args
      */
     public static void main(String[] args) {

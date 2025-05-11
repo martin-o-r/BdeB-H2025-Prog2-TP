@@ -1,17 +1,16 @@
 import eko.EKOConsole;
-import eko.EKOCouleur;
 
 public class Author extends InfoScreen {
 
     /**
-     * Constructeur d'objet pour la page de presentation de type Auhtor
+     * Constructeur d'objet pour la page de présentation de type Auhtor
      */
     public Author() {
         super("Page auteur", 0, 0, Etiquette.AUTHOR);
     }
 
     /**
-     * Method qui permet d'afficher les informations voulu dans l'ecran Auhtor
+     * Méthode qui permet d'afficher les informations voulu dans l'écran Auhtor
      */
     @Override
     protected void dessiner() {

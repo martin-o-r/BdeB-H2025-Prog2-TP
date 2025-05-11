@@ -3,8 +3,6 @@ import eko.EKOCouleur;
 
 public class Potion extends Items {
 
-    //Pour ne pas confondre la machine, la lettre L est assigne a la potion (pour 'Life')
-
     //Attributs
     private static String icon = "\uE273";
 

@@ -11,7 +11,7 @@ public class GhostHorizontal extends Ghost{
 
     /**
      * Méthode qui determine l'axe de placement de l'objet ghostHorizontal
-     * @return Boolean qui identifie l'axe X pour le deplacement de l'objet
+     * @return Boolean qui identifie l'axe X pour le déplacement de l'objet
      */
     @Override
     protected boolean moveOnXAxis() {

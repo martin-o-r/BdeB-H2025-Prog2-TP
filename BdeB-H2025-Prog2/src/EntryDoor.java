@@ -7,7 +7,7 @@ public class EntryDoor extends ObjetJeu {
     private static String icon = "\uEAD3";
 
     /**
-     * Constructor qui permet d'instancier la porte d'entree
+     * Constructeur qui permet d'instancier la porte d'entrée
      * @param x Position X de la porte d'entree
      * @param y Position Y de la porte d'entree
      */

@@ -11,7 +11,7 @@ public class GameTitle extends InfoScreen {
     }
 
     /**
-     * Method qui permet d'afficher les informations voulu dans la page Titre du jeu
+     * Méthode qui permet d'afficher les informations voulu dans la page titre du jeu
      */
     @Override
     protected void dessiner() {

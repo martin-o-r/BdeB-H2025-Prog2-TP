@@ -22,7 +22,7 @@ public abstract class HitSomething {
 
     /**
      * Méthode qui permet de déterminer si le prochain déplacement d'un objet entre en collision avec une porte
-     * d'entrée ou une porte de sortie
+     * d'entrée et/ou une porte de sortie
      * @param x Position X d'un objet
      * @param y Position Y d'un objet
      * @return Boolean qui determine si le prochain déplacement est valide

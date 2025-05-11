@@ -19,7 +19,7 @@ public class Fire extends Enemy {
     }
 
     /**
-     * Méthode qui permet de mettre à jour le feu (effet un feu qui brûle)
+     * Méthode qui permet de mettre à jour le feu (effet d'un feu qui brûle)
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override

@@ -10,7 +10,7 @@ public class GhostVertical extends Ghost{
     }
 
     /**
-     * Méthode qui détermine l'axe de placement de l'objet ghostVertical
+     * Méthode qui détermine l'axe déplacement de l'objet ghostVertical
      * @return Boolean qui identifie l'axe Y pour le deplacement de l'objet
      */
     @Override

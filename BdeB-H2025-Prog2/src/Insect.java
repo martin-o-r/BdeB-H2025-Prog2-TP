@@ -1,32 +1,38 @@
 import eko.EKOConsole;
 import eko.EKOCouleur;
 
-public class Insect extends Enemy{
+/**
+ * Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
+ *     https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
+ *     https://www.instructables.com/Robot-Maze-Solver/
+ *         -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
+ *             --> toujours tourner à gauche si on peut (valider prochain mouvement!!)
+ *             --> si on ne peut pas tourner à gauche... :
+ *                 --> aller tout droit
+ *                 --> ou aller tout droit, alors tourner à droite
+ *                 --> aller tout droit et tourner à gauche, alors faire demi-tour (methode reverse?)
+ *     https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
+ *     https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
+ *         -> Enum pour déterminer un sens de déplacement e.g. RIGHT implique position.x++
+ *     https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
+ *     https://en.wikipedia.org/wiki/Maze-solving_algorithm
+ *
+ * Enseignant :
+ *     -> commencer par la règle de la main gauche, se déplacer dans un sens e.g. RIGHT (sens de déplacement initial)
+ *     -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite (changer de
+ *             direction)
+ *
+ * Logique pour l'effet "toggle" avec un boolean
+ *     https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+ *          ->  un boolean va prendre la valeur inverse du lui-meme
+ */
 
-    /*
-    Tentative d'implementer l'algorithme 'left hand rule' -> Insecte se base sur cet "algorithme"
-    https://stackoverflow.com/questions/4362657/solving-a-maze-using-the-left-hand-rule
-    https://www.instructables.com/Robot-Maze-Solver/
-        -->"Left-hand rule" permet de franchir un labyrinthe en choisisant comment tourner aux intersections
-            --> toujours tourner à gauche si on peut (valider prochain mouvement!!)
-            --> si on ne peut pas tourner à gauche... :
-                --> aller tout droit
-                --> ou aller tout droit, alors tourner à droite
-                --> aller tout droit et tourner à gauche, alors faire demi-tour (methode reverse?)
-    https://www.youtube.com/watch?v=PrUjjPVVT6s&ab_channel=RocketsandRobotics
-    https://stackoverflow.com/questions/58869848/questions-about-right-hand-rule-maze-solver
-        -> Enum pour déterminer un sens de déplacement e.g. RIGHT implique position.x++
-    https://www.reddit.com/r/explainlikeimfive/comments/1g4lji/eli5_left_hand_wall_of_a_maze/
-    https://en.wikipedia.org/wiki/Maze-solving_algorithm
-    Enseignant :
-        -> commencer par la règle de la main gauche, se déplacer dans un sens e.g. RIGHT (sens de déplacement initial)
-        -> lorsqu'il y a une colision avec la porte, l'insecte devrait suivre la regle de main droite (changer de
-            direction)
-     */
+public class Insect extends Enemy{
 
     //Attributs
     private final String icon = "\uF188";
     private long waitBeforeMoving = 0;
+    private final long MAX_WAIT = 50;
     private InsectDirections direction = InsectDirections.RIGHT; //determine le sens de deplacement
     private boolean lefthandRule = true; //determiner "quelle main utiliser"
 
@@ -41,14 +47,14 @@ public class Insect extends Enemy{
 
     /**
      * Méthode qui permet d'actualiser le déplacement de l'insecte, soit longer les murs et rebrousser son chemin
-     * lorsqu'il se retrouve devant la porte de sortie verouillée...?
+     * lorsqu'il se retrouve devant la porte de sortie
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {
         //buffer pour le deplacement de l'insecte
         waitBeforeMoving += deltaTemps;
-        if(waitBeforeMoving < 50) {
+        if(waitBeforeMoving < MAX_WAIT) {
             return;
         }
         waitBeforeMoving = 0;
@@ -56,7 +62,7 @@ public class Insect extends Enemy{
         int nextX = position.x;
         int nextY = position.y;
 
-        //Insecte commence son déplacement en allant par la droite position.x++
+        //Insecte commence son déplacement en allant à sa droite
 
         switch (direction) {
             case UP -> nextY--;
@@ -78,7 +84,7 @@ public class Insect extends Enemy{
                 //vérifier s'il y un mur a gauche pour continuer à longer les mur - "left-hand rule"
                 goLeftHandRule();
             } else {
-                changeDirectionLHR(); //s'il y a un mur à gauche et devant, alors on doit tourner a gauche
+                changeDirectionLHR(); //s'il y a un mur à gauche et devant, alors on doit tourner à droite
             }
 
         } else {
@@ -89,10 +95,10 @@ public class Insect extends Enemy{
                 position.x = nextX;
                 position.y = nextY;
 
-                //verifier s'il y un mur a groite pour continuer a longer les mur - "left-hand rule"
+                //verifier s'il y un mur à droite pour continuer a longer les mur - "left-hand rule"
                 goRightHandRule();
             } else {
-                changeDirectionRHR(); //s'il y a un mur a gauche et devant, alors on doit tourner a gauche
+                changeDirectionRHR(); //s'il y a un mur à droite et devant, alors on doit tourner à gauche
             }
         }
 
@@ -104,12 +110,6 @@ public class Insect extends Enemy{
      * @param y Position Y de lobjet
      */
     private void handDecisionMaker(int x, int y) {
-        /*
-        Logique pour l'effet "toggle" avec un boolean
-        https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
-            ->  un boolean va prendre la valeur inverse du lui-meme
-         */
-
         if (didWeHitAroundExitDoor(x, y)) {
             lefthandRule = !lefthandRule;
             reverseDirection();

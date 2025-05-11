@@ -11,7 +11,6 @@ public enum Etiquette {
     WALL,
     ENTRY_DOOR,
     EXIT_DOOR,
-    LEVEL_INDICATOR,
     LIFE_INDICATOR,
     LEVEL1,
     LEVEL2,

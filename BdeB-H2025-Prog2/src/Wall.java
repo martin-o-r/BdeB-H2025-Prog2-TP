@@ -16,14 +16,14 @@ public class Wall extends ObjetJeu{
     }
 
     /**
-     * Method non implementee, car le mur ne se deplace pas
+     * Méthod non implementée, car le mur ne se déplace pas
      * @param deltaTemps Temps écoulé (en millisecondes) depuis la dernière trame
      */
     @Override
     protected void mettreAJour(long deltaTemps) {}
 
     /**
-     * Method qui permet l'affichage d'un objet Wall
+     * Méthode qui permet l'affichage d'un objet Wall
      */
     @Override
     protected void dessiner() {
