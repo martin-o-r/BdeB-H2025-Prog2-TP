@@ -69,7 +69,7 @@ public class LevelFileReader extends ObjetJeu{
             y++;
             for (int i = 0; i < s.length(); i++) { //index i utilisé pour la coordonée x des objets
 
-                ObjetJeu gameObject = switch (s.charAt(i)) {
+                ObjetJeu gameObject = switch (s.charAt(i)) { //tous les objets de jeu héritent de ObjetJeu
                     case '#' -> new Wall(i, y);
                     case 'P' -> new Player(i, y);
                     case '+' -> new EntryDoor(i, y);
