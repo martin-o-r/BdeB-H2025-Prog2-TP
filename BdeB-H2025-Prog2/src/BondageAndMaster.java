@@ -1,5 +1,15 @@
 import eko.*;
 
+/**
+ * Collège de Bois-de-Boulogne, session hiver 2025
+ * TP de fin de session
+ *
+ * Développement d'un jeu simple avec le système EKO fourni par l'enseignant.
+ *
+ * @author Martin Ore Rodriguez - 1425594
+ * @date Remise le 11 mai 2025
+ */
+
 public class BondageAndMaster {
 
     private static final int TPS = 30; // trames par seconde (FPS – Frames Per Second)
